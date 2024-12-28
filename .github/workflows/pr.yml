@@ -4,23 +4,29 @@ on:
     branches:
       - main
 
-env:
-  NIXPKGS_ALLOW_BROKEN: 1
-
 jobs:
   build:
+    name: Build distribution
+    uses: ./.github/workflows/_build_distribution.yml
+
+  check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v19
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v30
         with:
-          # Fixes: https://github.com/cachix/cachix-action/issues/138
-          install_url: https://releases.nixos.org/nix/nix-2.13.3/install
           nix_path: nixpkgs=channel:nixos-unstable
           extra_nix_config: |
             experimental-features = nix-command flakes
-      - uses: cachix/cachix-action@v12
+
+      - name: Install cachix
+        uses: cachix/cachix-action@v15
         with:
           name: cachix-action
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix --log-format raw -L build .#defaultDockerContainer.x86_64-linux --impure
+
+      - name: Run checks
+        run: nix flake check

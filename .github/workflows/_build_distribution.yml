@@ -1,0 +1,41 @@
+on:
+  workflow_call:
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v30
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Install cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: cachix-action
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      # `elm-pages build` will fail if lamdera is not installed.
+      # It is made its own step because it has several steps.
+      - name: Install lamdera
+        run: |
+          curl https://static.lamdera.com/bin/lamdera-1.3.2-linux-x86_64 -o /usr/local/bin/lamdera
+          chmod a+x /usr/local/bin/lamdera
+
+      - name: Install elm-pages deps
+        run: npm install
+
+      - name: Build
+        run: npx elm-pages@3.0.20 build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.3.4
+        with:
+          name: dist
+          path: ./dist
