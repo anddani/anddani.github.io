@@ -98,7 +98,12 @@ view _ _ _ _ pageView =
     { body =
         [ div [ Attr.css [ flex, flex_col, h_screen ] ]
             [ Css.Global.global globalStyles
-            , main_ [] pageView.body
+            , main_
+                [ Attr.class "container mx-auto" ]
+                [ div
+                    [ Attr.class "mx-auto w-full max-w-2xl" ]
+                    pageView.body
+                ]
             ]
             |> toUnstyled
         ]

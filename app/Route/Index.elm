@@ -2,19 +2,22 @@ module Route.Index exposing (ActionData, Data, Model, Msg, route)
 
 import Article
 import BackendTask exposing (BackendTask)
-import Date
 import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
-import Html.Styled as Html exposing (Attribute, Html)
-import Html.Styled.Attributes as Attr exposing (css)
+import Html.Styled as Html exposing (Html)
+import Html.Styled.Attributes exposing (class, css, href)
 import Pages.Url
 import PagesMsg exposing (PagesMsg)
 import Route exposing (Route)
 import RouteBuilder exposing (App, StatelessRoute)
 import Shared
 import Tailwind.Theme as Tw
-import Tailwind.Utilities as Tw
+import Tailwind.Utilities as Tw exposing (..)
+import UI.ArticleBox exposing (articleBox)
+import UI.Box exposing (box)
+import UI.Icons as Icons
+import UI.Typography as Typography
 import UrlPath
 import View exposing (View)
 
@@ -79,31 +82,54 @@ view :
     -> Shared.Model
     -> View (PagesMsg Msg)
 view app _ =
-    { title = "elm-pages is running"
+    { title = "André Danielsson"
     , body =
-        [ Html.h1 [ css [ Tw.text_color Tw.gray_600 ] ] [ Html.text "elm-pages is up and running!" ]
-        , Html.ul
-            []
-            (app.data.articles
-                |> List.map
-                    (\( route_, article ) ->
-                        Html.li
-                            []
-                            [ Html.text (article.title ++ " " ++ Date.toIsoString article.published)
-                            , link route_ [] [ Html.text "Read more" ]
-                            ]
-                    )
-            )
+        [ header
+        , articleList app.data.articles
         ]
     }
 
 
-link : Route -> List (Attribute msg) -> List (Html msg) -> Html msg
-link route_ attrs children =
-    Route.toLink
-        (\anchorAttrs ->
-            Html.a
-                (List.map Attr.fromUnstyled anchorAttrs ++ attrs)
-                children
-        )
-        route_
+iconRow : Html msg
+iconRow =
+    Html.div [ class "flex flex-row gap-4 pt-3" ]
+        [ socialLink "https://github.com/anddani" Icons.github
+        , socialLink "https://www.linkedin.com/in/andr%C3%A9-danielsson-143286bb/" Icons.linkedin
+        , socialLink "https://letterboxd.com/anddani" Icons.letterboxd
+        ]
+
+
+socialLink : String -> Html msg -> Html msg
+socialLink url icon =
+    Html.a
+        [ href url
+        , class "hover:opacity-50 transition-all duration-200"
+        ]
+        [ icon ]
+
+
+header : Html msg
+header =
+    Html.header
+        [ class "pt-12" ]
+        [ box ""
+            [ Typography.h2 "André Danielsson"
+            , Html.p
+                [ css
+                    [ Tw.pt_1
+                    ]
+                ]
+                [ Html.text "Software developer" ]
+            , iconRow
+            ]
+        ]
+
+
+articleList : List ( Route, Article.ArticleMetadata ) -> Html msg
+articleList articles =
+    Html.div [ css [ flex, flex_col, gap_6, pt_10 ] ]
+        [ Typography.h2 "Articles"
+        , Html.ul
+            [ css [ flex, flex_col, gap_3 ] ]
+            (List.map articleBox articles)
+        ]
