@@ -37,10 +37,6 @@ jobs:
           name: dist
           path: ./dist
 
-      - name: Test
-        run: |
-          ls -la ./dist
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
