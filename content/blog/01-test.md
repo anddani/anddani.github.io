@@ -1,9 +1,7 @@
 ---
 {
-  "author": "André Danielsson",
   "title": "Test article title",
   "description": "Test article description",
-  "image": "",
   "published": "2024-12-28",
 }
 ---
