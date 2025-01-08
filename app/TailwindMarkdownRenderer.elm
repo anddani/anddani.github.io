@@ -8,8 +8,7 @@ import Markdown.Block as Block
 import Markdown.Html
 import Markdown.Renderer
 import Oembed
-import SyntaxHighlight exposing (Theme)
-import SyntaxHighlightTheme
+import SyntaxHighlight
 import Tailwind.Utilities as Tw
 import UI.Typography as Typography
 
@@ -216,7 +215,7 @@ codeBlock details =
     in
     Html.div
         [ class "pb-4" ]
-        [ Html.node "style" [] [ Html.text SyntaxHighlightTheme.theme ]
+        [ Html.node "style" [] [ Html.text theme ]
         , details.body
             |> String.trim
             |> syntaxHighlight
@@ -224,3 +223,76 @@ codeBlock details =
             |> Result.map Html.fromUnstyled
             |> Result.withDefault (Html.pre [] [ Html.code [] [ Html.text details.body ] ])
         ]
+
+
+theme : String
+theme =
+    """
+.elmsh {
+    color: #f8f8f2;
+    background: #282a36;
+}
+
+.elmsh-hl {
+    background: #343434;
+}
+
+.elmsh-add {
+    background: #003800;
+}
+
+.elmsh-del {
+    background: #380000;
+}
+
+.elmsh-comm {
+    color: #75715e;
+}
+
+.elmsh1 {
+    color: #ae81ff;
+}
+
+.elmsh2 {
+    color: #e6db74;
+}
+
+.elmsh3 {
+    color: #f92672;
+}
+
+.elmsh4 {
+    color: #66d9ef;
+}
+
+.elmsh5 {
+    color: #a6e22e;
+}
+
+.elmsh6 {
+    color: #ae81ff;
+}
+
+.elmsh7 {
+    color: #fd971f;
+}
+
+.elmsh-elm-ts,
+.elmsh-js-dk,
+.elmsh-css-p {
+    font-style: italic;
+    color: #66d9ef;
+}
+
+.elmsh-js-ce {
+    font-style: italic;
+    color: #a6e22e;
+}
+
+.elmsh-css-ar-i {
+    font-weight: bold;
+    color: #f92672;
+}
+    """
+        |> String.filter (not << (==) '\n')
+        |> String.filter (not << (==) ' ')
