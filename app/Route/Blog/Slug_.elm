@@ -6,7 +6,9 @@ import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
 import Html.Styled as Html
+import Html.Styled.Attributes exposing (class)
 import Markdown.Block
+import Markdown.Renderer
 import MarkdownCodec
 import Pages.Url
 import PagesMsg exposing (PagesMsg)
@@ -89,5 +91,12 @@ view :
     -> View (PagesMsg Msg)
 view app _ =
     { title = "André Danielsson - Blog." ++ app.data.metadata.title
-    , body = [ Html.text "You're on the page Blog.Slug_" ]
+    , body =
+        [ Html.div
+            []
+            (app.data.body
+                |> Markdown.Renderer.render TailwindMarkdownRenderer.renderer
+                |> Result.withDefault []
+            )
+        ]
     }

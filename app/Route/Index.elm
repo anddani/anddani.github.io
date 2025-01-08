@@ -6,14 +6,12 @@ import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
 import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes exposing (class, css, href)
+import Html.Styled.Attributes exposing (class, href)
 import Pages.Url
 import PagesMsg exposing (PagesMsg)
 import Route exposing (Route)
 import RouteBuilder exposing (App, StatelessRoute)
 import Shared
-import Tailwind.Theme as Tw
-import Tailwind.Utilities as Tw exposing (..)
 import UI.ArticleBox exposing (articleBox)
 import UI.Box exposing (box)
 import UI.Icons as Icons
@@ -113,13 +111,8 @@ header =
     Html.header
         [ class "pt-12" ]
         [ box ""
-            [ Typography.h2 "André Danielsson"
-            , Html.p
-                [ css
-                    [ Tw.pt_1
-                    ]
-                ]
-                [ Html.text "Software developer" ]
+            [ Typography.h3 [] [ Html.text "André Danielsson" ]
+            , Typography.p [ class "pt-1" ] [ Html.text "Software developer" ]
             , iconRow
             ]
         ]
@@ -127,9 +120,9 @@ header =
 
 articleList : List ( Route, Article.ArticleMetadata ) -> Html msg
 articleList articles =
-    Html.div [ css [ flex, flex_col, gap_6, pt_10 ] ]
-        [ Typography.h2 "Articles"
+    Html.div [ class "flex flex-col gap-6 pt-10" ]
+        [ Typography.h3 [] [ Html.text "Articles" ]
         , Html.ul
-            [ css [ flex, flex_col, gap_3 ] ]
+            [ class "flex flex-col gap-3" ]
             (List.map articleBox articles)
         ]
