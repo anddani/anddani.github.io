@@ -17,8 +17,8 @@ articleBox ( route_, article ) =
             [ box "group hover:translate-y-[-3px] hover:shadow-md transition-all"
                 [ Html.div
                     [ class "flex flex-col gap-1" ]
-                    [ Typography.h4 "group-hover:underline" article.title
-                    , Typography.p "" article.description
+                    [ Typography.h5 [ class "group-hover:underline" ] [ Html.text article.title ]
+                    , Typography.p [] [ Html.text article.description ]
                     , Html.text <| toIsoString article.published
                     ]
                 ]
