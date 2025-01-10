@@ -1,17 +1,14 @@
 module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 
 import BackendTask exposing (BackendTask)
-import Css.Global
 import Effect exposing (Effect)
 import FatalError exposing (FatalError)
-import Html exposing (Html)
-import Html.Styled exposing (div, main_, toUnstyled)
-import Html.Styled.Attributes as Attr
+import Html exposing (Html, div, main_)
+import Html.Attributes exposing (class)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
 import Route exposing (Route)
 import SharedTemplate exposing (SharedTemplate)
-import Tailwind.Utilities exposing (..)
 import UrlPath exposing (UrlPath)
 import View exposing (View)
 
@@ -96,16 +93,14 @@ view :
     -> { body : List (Html msg), title : String }
 view _ _ _ _ pageView =
     { body =
-        [ div [ Attr.css [ flex, flex_col, h_screen ] ]
-            [ Css.Global.global globalStyles
-            , main_
-                [ Attr.class "container mx-auto" ]
+        [ div [ class "flex flex-col h-screen" ]
+            [ main_
+                [ class "container mx-auto" ]
                 [ div
-                    [ Attr.class "mx-auto w-full max-w-2xl" ]
+                    [ class "mx-auto w-full max-w-2xl" ]
                     pageView.body
                 ]
             ]
-            |> toUnstyled
         ]
     , title = pageView.title
     }

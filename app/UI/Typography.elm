@@ -1,10 +1,7 @@
 module UI.Typography exposing (h1, h2, h3, h4, h5, h6, p)
 
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes exposing (class, css)
-import Tailwind.Breakpoints exposing (..)
-import Tailwind.Theme exposing (..)
-import Tailwind.Utilities exposing (..)
+import Html exposing (Html)
+import Html.Attributes exposing (class)
 
 
 h1 : List (Html.Attribute msg) -> List (Html msg) -> Html msg
