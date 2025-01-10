@@ -5,8 +5,8 @@ import BackendTask exposing (BackendTask)
 import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
-import Html.Styled as Html
-import Html.Styled.Attributes exposing (class)
+import Html
+import Html.Attributes exposing (class)
 import Markdown.Block
 import Markdown.Renderer
 import MarkdownCodec

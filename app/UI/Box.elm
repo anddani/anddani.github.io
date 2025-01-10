@@ -1,8 +1,7 @@
 module UI.Box exposing (box)
 
-import Html.Styled as Html exposing (Attribute, Html)
-import Html.Styled.Attributes exposing (class, css)
-import Tailwind.Utilities exposing (..)
+import Html exposing (Html)
+import Html.Attributes exposing (class)
 
 
 box : String -> List (Html msg) -> Html msg

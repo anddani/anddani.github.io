@@ -2,8 +2,8 @@ module UI.ArticleBox exposing (articleBox)
 
 import Article
 import Date exposing (toIsoString)
-import Html.Styled as Html exposing (Attribute, Html)
-import Html.Styled.Attributes exposing (class, fromUnstyled)
+import Html exposing (Attribute, Html)
+import Html.Attributes exposing (class)
 import Route exposing (Route)
 import UI.Box exposing (box)
 import UI.Typography as Typography
@@ -31,7 +31,7 @@ link route_ attrs children =
     Route.toLink
         (\anchorAttrs ->
             Html.a
-                (List.map fromUnstyled anchorAttrs ++ attrs)
+                (anchorAttrs ++ attrs)
                 children
         )
         route_

@@ -1,15 +1,13 @@
 module TailwindMarkdownRenderer exposing (renderer)
 
-import Css
 import Ellie
-import Html.Styled as Html
-import Html.Styled.Attributes as Attr exposing (class, css)
+import Html
+import Html.Attributes as Attr exposing (class)
 import Markdown.Block as Block
 import Markdown.Html
 import Markdown.Renderer
 import Oembed
 import SyntaxHighlight
-import Tailwind.Utilities as Tw
 import UI.Typography as Typography
 
 
@@ -19,26 +17,17 @@ renderer =
     , paragraph = Typography.p [ class "pb-4" ]
     , thematicBreak = Html.hr [] []
     , text = Html.text
-    , strong = \content -> Html.strong [ css [ Tw.font_bold ] ] content
-    , emphasis = \content -> Html.em [ css [ Tw.italic ] ] content
+    , strong = \content -> Html.strong [ class "font-bold" ] content
+    , emphasis = \content -> Html.em [ class "italic" ] content
     , blockQuote = Html.blockquote []
     , codeSpan =
         \content ->
-            Html.code
-                [ css
-                    [ Tw.font_semibold
-                    , Tw.font_medium
-                    , Css.color (Css.rgb 226 0 0) |> Css.important
-                    ]
-                ]
-                [ Html.text content ]
+            Html.code [ class "font-semibold font-medium !text-[#E20000]" ] [ Html.text content ]
     , link =
         \{ destination } body ->
             Html.a
                 [ Attr.href destination
-                , css
-                    [ Tw.underline
-                    ]
+                , class "underline"
                 ]
                 body
     , hardLineBreak = Html.br [] []
@@ -105,7 +94,6 @@ renderer =
             [ Markdown.Html.tag "oembed"
                 (\url _ ->
                     Oembed.view [] Nothing url
-                        |> Maybe.map Html.fromUnstyled
                         |> Maybe.withDefault (Html.div [] [])
                 )
                 |> Markdown.Html.withAttribute "url"
@@ -116,7 +104,7 @@ renderer =
                 |> Markdown.Html.withAttribute "id"
             ]
     , codeBlock = codeBlock
-    , table = Html.table [ css [] ]
+    , table = Html.table []
     , tableHeader = Html.thead []
     , tableBody = Html.tbody []
     , tableRow = Html.tr []
@@ -169,14 +157,6 @@ renderer =
     }
 
 
-rawTextToId : String -> String
-rawTextToId rawText =
-    rawText
-        |> String.split " "
-        |> String.join "-"
-        |> String.toLower
-
-
 heading : { level : Block.HeadingLevel, rawText : String, children : List (Html.Html msg) } -> Html.Html msg
 heading { level, rawText, children } =
     case level of
@@ -220,7 +200,6 @@ codeBlock details =
             |> String.trim
             |> syntaxHighlight
             |> Result.map (SyntaxHighlight.toBlockHtml (Just 1))
-            |> Result.map Html.fromUnstyled
             |> Result.withDefault (Html.pre [] [ Html.code [] [ Html.text details.body ] ])
         ]
 

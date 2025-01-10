@@ -5,8 +5,8 @@ import BackendTask exposing (BackendTask)
 import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes exposing (class, href)
+import Html exposing (Html)
+import Html.Attributes exposing (class, href)
 import Pages.Url
 import PagesMsg exposing (PagesMsg)
 import Route exposing (Route)
