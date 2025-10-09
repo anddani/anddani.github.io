@@ -1,0 +1,22 @@
+### Elixir ###
+_build/
+deps/
+.nix-hex/
+.nix-mix/
+.expert/
+
+.erlang-history/
+
+### Phoenix ###
+
+priv/static/assets/
+priv/static/cache_manifest.json
+assets/node_modules/
+config/*.secret.exs
+
+### Nix ###
+result*
+.direnv/
+
+### Misc ###
+.DS_Store
