@@ -89,34 +89,30 @@ function random(min, max) {
 }
 
 let starsArray = [];
-const NUM_STARS = 1024;
-const WORLD_WIDTH = 2048; // Define the fixed coordinate system size
-const WORLD_HEIGHT = 2048;
+const NUM_STARS = 2048;
+const WORLD_WIDTH = 4096; // Define the fixed coordinate system size
+const WORLD_HEIGHT = 4096;
 
-function setupStars() {
-  for (let i = 0; i < NUM_STARS; i++) {
-    // Generate ABSOLUTE coordinates within the fixed world size
-    let xPos = random(2, WORLD_WIDTH - 2);
-    let yPos = random(2, WORLD_HEIGHT - 2);
+for (let i = 0; i < NUM_STARS; i++) {
+  // Generate ABSOLUTE coordinates within the fixed world size
+  let xPos = random(2, WORLD_WIDTH - 2);
+  let yPos = random(2, WORLD_HEIGHT - 2);
 
-    // Store other fixed properties
-    let alpha = random(0.5, 1);
-    let size = random(1, 2);
+  // Store other fixed properties
+  let alpha = random(0.5, 1);
+  let size = random(1, 2);
 
-    starsArray.push({
-      // ABSOLUTE coordinates (these NEVER change)
-      x: xPos,
-      y: yPos,
-      // Fixed properties
-      alpha: alpha,
-      size: size
-    });
-  }  
+  starsArray.push({
+    // ABSOLUTE coordinates (these NEVER change)
+    x: xPos,
+    y: yPos,
+    // Fixed properties
+    alpha: alpha,
+    size: size
+  });
 }
 
-setupStars();
-
-function stars() {
+function drawStars() {
   if (!ctx) {
     return;
   }
@@ -140,7 +136,7 @@ function stars() {
 } 
 
 window.addEventListener('resize', function() {
-  stars();
+  drawStars();
 });
 
-stars();
+drawStars();

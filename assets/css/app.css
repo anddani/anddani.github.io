@@ -23,7 +23,7 @@
   on Elixir colors. Build your own at: https://daisyui.com/theme-generator/ */
 @plugin "../vendor/daisyui-theme" {
     name: "dark";
-    default: false;
+    default: true;
     prefersdark: true;
     color-scheme: "dark";
     --color-base-100: oklch(30.33% 0.016 252.42);
@@ -58,7 +58,7 @@
 
 @plugin "../vendor/daisyui-theme" {
     name: "light";
-    default: true;
+    default: false;
     prefersdark: false;
     color-scheme: "light";
     --color-base-100: oklch(98% 0 0);
@@ -106,30 +106,3 @@
 }
 
 /* This file is for your main application CSS */
-
-@theme {
-    --animate-star-move-fast: move-star 10s linear infinite, blink-star 2s linear infinite;
-    --animate-star-move-medium: move-star 20s linear infinite, blink-star 2s linear infinite;
-    --animate-star-move-slow: move-star 30s linear infinite, blink-star 2s linear infinite;
-
-    @keyframes move-star {
-        0% {
-            transform: translate(0, 0);
-            opacity: 0.1
-        }
-        100% {
-            transform: translate(100vw, 100vh);
-            opacity: 1.0
-        }
-    }
-
-    @keyframes blink-star {
-        0%,
-        100% {
-            opacity: 0.6
-        }
-        50% {
-            opacity: 1.0
-        }
-    }
-}
