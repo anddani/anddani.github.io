@@ -35,7 +35,7 @@
             [
               # elixir dependencies
               elixir
-              # elixir_ls # elixir lsp
+              elixir_ls # elixir lsp
               # erlang
               erlang_27
               erlang-ls # erlang lsp
