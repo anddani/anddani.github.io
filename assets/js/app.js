@@ -89,27 +89,29 @@ function random(min, max) {
 }
 
 let starsArray = [];
-const NUM_STARS = 1024; // As requested
+const NUM_STARS = 1024;
+const WORLD_WIDTH = 2048; // Define the fixed coordinate system size
+const WORLD_HEIGHT = 2048;
 
 function setupStars() {
   for (let i = 0; i < NUM_STARS; i++) {
-    // Generate normalized (0 to 1) coordinates for a uniform look
-    let normalizedX = Math.random();
-    let normalizedY = Math.random();
+    // Generate ABSOLUTE coordinates within the fixed world size
+    let xPos = random(2, WORLD_WIDTH - 2);
+    let yPos = random(2, WORLD_HEIGHT - 2);
 
-    // Store other properties that shouldn't change
+    // Store other fixed properties
     let alpha = random(0.5, 1);
     let size = random(1, 2);
 
     starsArray.push({
-      // Normalized coordinates
-      xNorm: normalizedX,
-      yNorm: normalizedY,
+      // ABSOLUTE coordinates (these NEVER change)
+      x: xPos,
+      y: yPos,
       // Fixed properties
       alpha: alpha,
       size: size
     });
-  }
+  }  
 }
 
 setupStars();
@@ -124,18 +126,16 @@ function stars() {
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (const star of starsArray) {
-    // 1. Calculate the ABSOLUTE pixel position using the current canvas dimensions
-    let xPos = star.xNorm * canvas.width;
-    let yPos = star.yNorm * canvas.height;
-
-    // 2. Use the fixed, stored properties
-    let alpha = star.alpha;
-    let size = star.size;
-
-    // Add stars
-    ctx.fillStyle = '#ffffff';
-    ctx.globalAlpha = alpha;
-    ctx.fillRect(xPos, yPos, size, size);
+    // Check if the star's fixed absolute position is within the current viewport
+    // The viewport always starts at (0, 0)
+    if (star.x >= 0 && star.x <= canvas.width && 
+        star.y >= 0 && star.y <= canvas.height) {
+      
+      // The star is visible, draw it at its fixed (x, y) coordinates
+      ctx.fillStyle = '#ffffff';
+      ctx.globalAlpha = star.alpha;
+      ctx.fillRect(star.x, star.y, star.size, star.size);
+    }
   }
 } 
 
