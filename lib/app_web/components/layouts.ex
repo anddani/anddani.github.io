@@ -64,12 +64,13 @@ defmodule AppWeb.Layouts do
     </header>
 
     <main class="px-4 py-20 sm:px-6 lg:px-8 bg-black h-screen">
-      <div class="h-2 w-2 bg-white absolute top-0 left-0 animate-star-move-slow" />
-      <div class="h-2 w-2 bg-white absolute top-0 left-0 animate-star-move-medium" />
-      <div class="h-2 w-2 bg-white absolute top-0 left-0 animate-star-move-fast" />
-
-      <!-- TODO: Make this blink!!! -->
-      <div class="h-2 w-2 bg-white absolute top-50% left-50% animate-star-blink" />
+      <canvas
+        id="canvas"
+        class="h-fill w-fill"
+        phx-update="ignore"
+      >
+        Your browser does not support the HTML5 canvas tag.
+      </canvas>
 
       <div class="mx-auto max-w-2xl space-y-4">
         {render_slot(@inner_block)}
