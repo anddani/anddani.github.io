@@ -25,6 +25,8 @@ import {LiveSocket} from "phoenix_live_view"
 import {hooks as colocatedHooks} from "phoenix-colocated/app"
 import topbar from "../vendor/topbar"
 
+import "./stars.js"
+
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
@@ -81,62 +83,5 @@ if (process.env.NODE_ENV === "development") {
   })
 }
 
-const canvas = document.querySelector('#canvas');
-const ctx = canvas?.getContext('2d');
 
-function random(min, max) {
-  return min + Math.random() * (max + 1 - min);
-}
 
-let starsArray = [];
-const NUM_STARS = 2048;
-const WORLD_WIDTH = 4096; // Define the fixed coordinate system size
-const WORLD_HEIGHT = 4096;
-
-for (let i = 0; i < NUM_STARS; i++) {
-  // Generate ABSOLUTE coordinates within the fixed world size
-  let xPos = random(2, WORLD_WIDTH - 2);
-  let yPos = random(2, WORLD_HEIGHT - 2);
-
-  // Store other fixed properties
-  let alpha = random(0.5, 1);
-  let size = random(1, 2);
-
-  starsArray.push({
-    // ABSOLUTE coordinates (these NEVER change)
-    x: xPos,
-    y: yPos,
-    // Fixed properties
-    alpha: alpha,
-    size: size
-  });
-}
-
-function drawStars() {
-  if (!ctx) {
-    return;
-  }
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  // Clear the canvas if necessary (usually done outside this function)
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  for (const star of starsArray) {
-    // Check if the star's fixed absolute position is within the current viewport
-    // The viewport always starts at (0, 0)
-    if (star.x >= 0 && star.x <= canvas.width && 
-        star.y >= 0 && star.y <= canvas.height) {
-      
-      // The star is visible, draw it at its fixed (x, y) coordinates
-      ctx.fillStyle = '#ffffff';
-      ctx.globalAlpha = star.alpha;
-      ctx.fillRect(star.x, star.y, star.size, star.size);
-    }
-  }
-} 
-
-window.addEventListener('resize', function() {
-  drawStars();
-});
-
-drawStars();
