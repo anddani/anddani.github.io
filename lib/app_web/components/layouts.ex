@@ -44,14 +44,14 @@ defmodule AppWeb.Layouts do
       Your browser does not support the HTML5 canvas tag.
     </canvas>
 
-    <div class="flex flex-col size-full min-h-dvh max-w-dvw">
+    <div class="flex flex-col h-screen max-w-dvw">
 
       <!-- Header -->
       <header class="w-full px-4 py-8 sm:px-6 lg:px-8 bg-transparent border-b-gray-600 border-b-2">
         <h1>Welcome!</h1>
       </header>
 
-      <div class="flex flex-row">
+      <div class="flex flex-row min-h-0">
         <!-- Navbar -->
         <nav class="px-4 py-2 border-r-gray-600 border-r-2">
           <ul class="flex flex-col gap-2">
@@ -61,10 +61,8 @@ defmodule AppWeb.Layouts do
         </nav>
 
         <!-- Main content -->
-        <main class="px-4 py-20 sm:px-6 lg:px-8 bg-red h-screen">
-          <div class="mx-auto max-w-2xl space-y-4">
-            {render_slot(@inner_block)}
-          </div>
+        <main class="px-4 grow overflow-y-auto">
+          {render_slot(@inner_block)}
         </main>
       </div>
     </div>
