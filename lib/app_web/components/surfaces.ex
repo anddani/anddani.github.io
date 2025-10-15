@@ -16,7 +16,16 @@ defmodule AppWeb.Surfaces do
 
   def frame(assigns) do
     ~H"""
-    <div class="border-b-gray-600 border-r-gray-600 border-b-2 border-r-2 border-l-gray-300 border-l-2 border-t-2 border-t-gray-300 bg-white/15 p-4">
+    <div class={
+      Enum.join(
+        [
+          "border-2 border-2 p-4",
+          "border-b-gray-600 border-r-gray-600 border-l-gray-300 border-t-gray-300 bg-white/15 p-4",
+          "active:bg-white/20 active:border-b-gray-300 active:border-r-gray-300 active:border-l-gray-600 active:border-t-gray-600"
+        ],
+        " "
+      )
+    }>
       {render_slot(@inner_block)}
     </div>
     """
