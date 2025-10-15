@@ -45,8 +45,8 @@ defmodule AppWeb.Layouts do
     </canvas>
 
     <div class="flex flex-col h-screen max-w-dvw">
-
-      <!-- Header -->
+      
+    <!-- Header -->
       <header class="w-full px-4 py-8 sm:px-6 lg:px-8 bg-transparent border-b-gray-600 border-b-2">
         <h1>Welcome!</h1>
       </header>
@@ -56,17 +56,16 @@ defmodule AppWeb.Layouts do
         <nav class="px-4 py-2 border-r-gray-600 border-r-2">
           <ul class="flex flex-col gap-2">
             <li>Recipes</li>
-            <li>Sakelog</li>
+            <li><ButtonLayouts.tokkuri href={~p"/"} /></li>
           </ul>
         </nav>
-
-        <!-- Main content -->
+        
+    <!-- Main content -->
         <main class="px-4 grow overflow-y-auto">
           {render_slot(@inner_block)}
         </main>
       </div>
     </div>
-
 
     <.flash_group flash={@flash} />
     """
@@ -128,9 +127,9 @@ defmodule AppWeb.Layouts do
 
   def frame(assigns) do
     ~H"""
-      <div class="min-w-[300px] max-w-[640px] w-full min-h-[300px] border-b-gray-600 border-r-gray-600 border-b-2 border-r-2 border-l-gray-300 border-l-2 border-t-2 border-t-gray-300 bg-white/15 p-4">
-        {render_slot(@inner_block)}
-      </div>
+    <div class="min-w-[300px] max-w-[640px] w-full min-h-[300px] border-b-gray-600 border-r-gray-600 border-b-2 border-r-2 border-l-gray-300 border-l-2 border-t-2 border-t-gray-300 bg-white/15 p-4">
+      {render_slot(@inner_block)}
+    </div>
     """
   end
 end

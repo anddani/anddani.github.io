@@ -45,6 +45,8 @@
 
               nil
               nixd
+              nodePackages.vscode-langservers-extracted
+              tailwindcss-language-server
             ]
             ++ lib.optionals stdenv.isLinux [
               # For ExUnit Notifier on Linux.

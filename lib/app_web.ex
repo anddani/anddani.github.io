@@ -90,6 +90,7 @@ defmodule AppWeb do
       # Common modules used in templates
       alias Phoenix.LiveView.JS
       alias AppWeb.Layouts
+      alias AppWeb.ButtonLayouts
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())
