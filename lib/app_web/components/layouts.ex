@@ -45,22 +45,18 @@ defmodule AppWeb.Layouts do
     </canvas>
 
     <div class="flex flex-col h-screen max-w-dvw">
-      
-    <!-- Header -->
       <header class="w-full px-4 py-8 sm:px-6 lg:px-8 bg-transparent border-b-gray-600 border-b-2">
         <h1 class="text-[42px]">Welcome!</h1>
       </header>
 
       <div class="flex flex-row min-h-0 h-full">
-        <!-- Navbar -->
-        <nav class="px-4 py-2 border-r-gray-600 border-r-2 shrink-0">
+        <nav class="p-4 border-r-gray-600 border-r-2 shrink-0">
           <ul class="flex flex-col gap-2">
             <li><ButtonLayouts.recipes /></li>
             <li><ButtonLayouts.sakelog /></li>
           </ul>
         </nav>
-        
-    <!-- Main content -->
+
         <main class="px-4 grow overflow-y-auto">
           {render_slot(@inner_block)}
         </main>
