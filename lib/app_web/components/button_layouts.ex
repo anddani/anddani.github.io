@@ -9,7 +9,7 @@ defmodule AppWeb.ButtonLayouts do
   def tokkuri(assigns) do
     ~H"""
     <.link href={@href}>
-      <Surfaces.frame>
+      <Surfaces.frame clickable class="pr-4 py-1">
         <div class="inline-flex gap-2 items-center justify-center">
           <img class="size-12" src={~p"/images/tokkuri.png"} />
           <span>Sakelog</span>
