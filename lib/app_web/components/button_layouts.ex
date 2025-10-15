@@ -1,5 +1,6 @@
 defmodule AppWeb.ButtonLayouts do
   use Phoenix.Component
+  alias AppWeb.Surfaces
 
   use AppWeb, :verified_routes
 
@@ -7,13 +8,14 @@ defmodule AppWeb.ButtonLayouts do
 
   def tokkuri(assigns) do
     ~H"""
-    <a
-      href={@href}
-      class="flex flex-row gap-2 bg-white items-center pr-[22px]"
-    >
-      <img src={~p"/images/tokkuri.png"} />
-      <span class="text-black">Sakelog</span>
-    </a>
+    <.link href={@href}>
+      <Surfaces.frame>
+        <div class="flex flex-row gap-2 items-center pr-[22px]">
+          <img class="size-12" src={~p"/images/tokkuri.png"} />
+          <span class="">Sakelog</span>
+        </div>
+      </Surfaces.frame>
+    </.link>
     """
   end
 end

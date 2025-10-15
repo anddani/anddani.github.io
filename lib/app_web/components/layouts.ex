@@ -113,23 +113,4 @@ defmodule AppWeb.Layouts do
     </div>
     """
   end
-
-  @doc """
-  Wraps the content in a frame.
-
-  ## Examples
-
-      <.frame>
-        This text will be displayed inside a frame
-      </.frame>
-  """
-  slot(:inner_block, required: true)
-
-  def frame(assigns) do
-    ~H"""
-    <div class="min-w-[300px] max-w-[640px] w-full min-h-[300px] border-b-gray-600 border-r-gray-600 border-b-2 border-r-2 border-l-gray-300 border-l-2 border-t-2 border-t-gray-300 bg-white/15 p-4">
-      {render_slot(@inner_block)}
-    </div>
-    """
-  end
 end
