@@ -55,8 +55,8 @@ defmodule AppWeb.Layouts do
         <!-- Navbar -->
         <nav class="px-4 py-2 border-r-gray-600 border-r-2 shrink-0">
           <ul class="flex flex-col gap-2">
-            <li>Recipes</li>
-            <li><ButtonLayouts.tokkuri href={~p"/"} /></li>
+            <li><ButtonLayouts.recipes /></li>
+            <li><ButtonLayouts.sakelog /></li>
           </ul>
         </nav>
         

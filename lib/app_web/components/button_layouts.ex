@@ -4,15 +4,29 @@ defmodule AppWeb.ButtonLayouts do
 
   use AppWeb, :verified_routes
 
-  attr :href, :any
+  def recipes(assigns) do
+    ~H"""
+    <.button_frame text="Recipes" href={~p"/recipes"} img_src={~p"/images/tokkuri.png"} />
+    """
+  end
 
-  def tokkuri(assigns) do
+  def sakelog(assigns) do
+    ~H"""
+    <.button_frame text="Sakelog" href={~p"/sakelog"} img_src={~p"/images/tokkuri.png"} />
+    """
+  end
+
+  attr(:href, :string, required: true)
+  attr(:text, :string, required: true)
+  attr(:img_src, :string, required: true)
+
+  defp button_frame(assigns) do
     ~H"""
     <.link href={@href}>
       <Surfaces.frame clickable class="pr-4 py-1">
         <div class="inline-flex gap-2 items-center justify-center">
-          <img class="size-12" src={~p"/images/tokkuri.png"} />
-          <span>Sakelog</span>
+          <img class="size-12" src={@img_src} />
+          <span>{@text}</span>
         </div>
       </Surfaces.frame>
     </.link>
