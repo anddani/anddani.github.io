@@ -10,9 +10,9 @@ defmodule AppWeb.ButtonLayouts do
     ~H"""
     <.link href={@href}>
       <Surfaces.frame>
-        <div class="flex flex-row gap-2 items-center pr-[22px]">
+        <div class="inline-flex gap-2 items-center justify-center">
           <img class="size-12" src={~p"/images/tokkuri.png"} />
-          <span class="">Sakelog</span>
+          <span>Sakelog</span>
         </div>
       </Surfaces.frame>
     </.link>

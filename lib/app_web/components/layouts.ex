@@ -51,9 +51,9 @@ defmodule AppWeb.Layouts do
         <h1 class="text-[42px]">Welcome!</h1>
       </header>
 
-      <div class="flex flex-row min-h-0">
+      <div class="flex flex-row min-h-0 h-full">
         <!-- Navbar -->
-        <nav class="px-4 py-2 border-r-gray-600 border-r-2">
+        <nav class="px-4 py-2 border-r-gray-600 border-r-2 shrink-0">
           <ul class="flex flex-col gap-2">
             <li>Recipes</li>
             <li><ButtonLayouts.tokkuri href={~p"/"} /></li>
