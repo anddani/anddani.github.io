@@ -14,9 +14,12 @@ priv/static/cache_manifest.json
 assets/node_modules/
 config/*.secret.exs
 
+*.db*
+
 ### Nix ###
 result*
 .direnv/
 
 ### Misc ###
 .DS_Store
+erl_crash.dump
