@@ -45,8 +45,10 @@ defmodule AppWeb.Layouts do
     </canvas>
 
     <div class="flex flex-col h-screen max-w-dvw">
-      <header class="w-full px-4 py-8 sm:px-6 lg:px-8 bg-transparent border-b-gray-600 border-b-2">
-        <h1 class="text-[42px]">Welcome!</h1>
+      <header class="w-full px-4 pt-3 pb-6 sm:px-6 lg:px-8 bg-transparent border-b-gray-600 border-b-2">
+        <a href={~p"/"}>
+          <h1 class="text-[42px]">Welcome!</h1>
+        </a>
       </header>
 
       <div class="flex flex-row min-h-0 h-full">

@@ -8,7 +8,7 @@ defmodule AppWeb.RecipeLive.Index do
     ~H"""
     <Layouts.app flash={@flash}>
       <.header>
-        Listing Recipes
+        Recipes
         <:actions>
           <.button variant="primary" navigate={~p"/recipes/new"}>
             <.icon name="hero-plus" /> New Recipe
@@ -16,11 +16,10 @@ defmodule AppWeb.RecipeLive.Index do
         </:actions>
       </.header>
 
-      <div class="mx-auto max-w-2xl mt-20 flex flex-col space-y-8 bg-white p-8 shadow-sm">
+      <div>
         <.form for={%{}} as={:search} phx-change="search" phx-submit="search">
           <.input
             type="search"
-            class="w-full border border-gray-100 text-2xl active:border-0 active:border-gray-200 focus:border-gray-200 focus:ring-0 bg-gray-50"
             value={@q}
             name="query"
             placeholder="Search..."
