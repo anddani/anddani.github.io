@@ -101,4 +101,17 @@ defmodule App.Recipes do
   def change_recipe(%Recipe{} = recipe, attrs \\ %{}) do
     Recipe.changeset(recipe, attrs)
   end
+
+  @doc """
+  Searches for recipes based on a query.
+
+  ## Examples
+
+      iex> search_recipes("query")
+      [%Recipe{}, ...]
+
+  """
+  def search_recipes(query) do
+    Repo.all(from(r in Recipe, where: like(r.title, ^"%#{query}%")))
+  end
 end

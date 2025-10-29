@@ -16,6 +16,25 @@ defmodule AppWeb.RecipeLive.Index do
         </:actions>
       </.header>
 
+      <div class="mx-auto max-w-2xl mt-20 flex flex-col space-y-8 bg-white p-8 shadow-sm">
+        <.form for={%{}} as={:search} phx-change="search" phx-submit="search">
+          <.input
+            type="search"
+            class="w-full border border-gray-100 text-2xl active:border-0 active:border-gray-200 focus:border-gray-200 focus:ring-0 bg-gray-50"
+            value={@q}
+            name="query"
+            placeholder="Search..."
+          />
+        </.form>
+        <div class="flex flex-col space-y-8">
+          <div :for={recipe <- @recipes} class="flex flex-col space-y-1">
+            <h2 class="text-2xl font-medium text-gray-900">
+              {recipe.title}
+            </h2>
+          </div>
+        </div>
+      </div>
+
       <.table
         id="recipes"
         rows={@streams.recipes}
@@ -48,9 +67,13 @@ defmodule AppWeb.RecipeLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    dbg("MOUNTING")
+
     {:ok,
      socket
      |> assign(:page_title, "Listing Recipes")
+     |> assign(:recipes, [])
+     |> assign(:q, "")
      |> stream(:recipes, list_recipes())}
   end
 
@@ -60,6 +83,17 @@ defmodule AppWeb.RecipeLive.Index do
     {:ok, _} = Recipes.delete_recipe(recipe)
 
     {:noreply, stream_delete(socket, :recipes, recipe)}
+  end
+
+  @impl true
+  def handle_event("search", %{"query" => q}, socket) do
+    recipes =
+      q
+      |> App.Recipes.search_recipes()
+
+    dbg("Recipes found: #{inspect(recipes)}")
+
+    {:noreply, assign(socket, :recipes, recipes)}
   end
 
   defp list_recipes() do
