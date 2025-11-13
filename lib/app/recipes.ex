@@ -8,8 +8,30 @@ defmodule App.Recipes do
 
   alias App.Recipes.Recipe
 
+  @recipes_path Path.join([:code.priv_dir(:app), "static", "recipes"])
+
   @doc """
-  Returns the list of recipes.
+  Returns the recipe from a file.
+
+  ## Examples
+
+      iex> get_recipe_from_file!("recipe.yaml")
+      %Recipe{}
+
+  """
+  defp get_recipe_from_file!(recipe_filename) do
+    slug = Path.basename(recipe_filename, ".yaml")
+
+    recipe_path = Path.join(@recipes_path, recipe_filename)
+    recipe_attrs = YamlElixir.read_from_file!(recipe_path, atoms: true)
+    |> Map.put(:slug, slug)
+
+    changeset = Recipe.changeset(%Recipe{}, recipe_attrs)
+    changeset.changes
+  end
+
+  @doc """
+  Returns the list of recipes from files.
 
   ## Examples
 
@@ -18,7 +40,10 @@ defmodule App.Recipes do
 
   """
   def list_recipes do
-    Repo.all(Recipe)
+    File.ls!(@recipes_path)
+    |> Task.async_stream(&get_recipe_from_file!/1, max_concurrency: 10)
+    |> Enum.to_list()
+    |> Enum.map(fn {:ok, recipe} -> recipe end)
   end
 
   @doc """
