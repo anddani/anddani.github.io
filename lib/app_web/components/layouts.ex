@@ -59,7 +59,7 @@ defmodule AppWeb.Layouts do
           </ul>
         </nav>
 
-        <main class="px-4 grow overflow-y-auto">
+        <main class="px-4 grow overflow-y-hidden">
           {render_slot(@inner_block)}
         </main>
       </div>

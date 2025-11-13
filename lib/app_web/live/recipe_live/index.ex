@@ -7,73 +7,50 @@ defmodule AppWeb.RecipeLive.Index do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash}>
-      <.header>
-        Recipes
-        <:actions>
-          <.button variant="primary" navigate={~p"/recipes/new"}>
-            <.icon name="hero-plus" /> New Recipe
-          </.button>
-        </:actions>
-      </.header>
+      <div class="flex flex-col h-full">
+        <.header>
+          Recipes
+          <:actions>
+            <.button variant="primary" navigate={~p"/recipes/new"}>
+              <.icon name="hero-plus" /> New Recipe
+            </.button>
+          </:actions>
+        </.header>
 
-      <div>
-        <.form for={%{}} as={:search} phx-change="search" phx-submit="search">
-          <.input
-            type="search"
-            value={@q}
-            name="query"
-            placeholder="Search..."
-          />
-        </.form>
-        <div class="flex flex-col space-y-8">
-          <div :for={recipe <- @recipes} class="flex flex-col space-y-1">
-            <h2 class="text-2xl font-medium text-gray-900">
-              {recipe.title}
-            </h2>
-          </div>
+        <div>
+          <.form for={%{}} as={:search} phx-change="search" phx-submit="search">
+            <.input
+              type="search"
+              value={@q}
+              name="query"
+              placeholder="Search..."
+            />
+          </.form>
         </div>
-      </div>
 
-      <.table
-        id="recipes"
-        rows={@streams.recipes}
-        row_click={fn {_id, recipe} -> JS.navigate(~p"/recipes/#{recipe}") end}
-      >
-        <:col :let={{_id, recipe}} label="Title">{recipe.title}</:col>
-        <:col :let={{_id, recipe}} label="Slug">{recipe.slug}</:col>
-        <:col :let={{_id, recipe}} label="Ingredients">{recipe.ingredients}</:col>
-        <:col :let={{_id, recipe}} label="Instructions">{recipe.instructions}</:col>
-        <:col :let={{_id, recipe}} label="Tags">{recipe.tags}</:col>
-        <:col :let={{_id, recipe}} label="Image url">{recipe.image_url}</:col>
-        <:action :let={{_id, recipe}}>
-          <div class="sr-only">
-            <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>
-          </div>
-          <.link navigate={~p"/recipes/#{recipe}/edit"}>Edit</.link>
-        </:action>
-        <:action :let={{id, recipe}}>
-          <.link
-            phx-click={JS.push("delete", value: %{id: recipe.id}) |> hide("##{id}")}
-            data-confirm="Are you sure?"
-          >
-            Delete
-          </.link>
-        </:action>
-      </.table>
+        <ul
+          id="recipes"
+          phx-update="stream"
+          class="h-full overflow-y-auto flex flex-col gap-2 grow pb-4"
+        >
+          <li :for={{dom_id, recipe} <- @streams.recipes} id={dom_id}>
+            <AppWeb.RecipesLayouts.recipe_item recipe={recipe} />
+          </li>
+        </ul>
+      </div>
     </Layouts.app>
     """
   end
 
   @impl true
   def mount(_params, _session, socket) do
-    dbg("MOUNTING")
+    recipes = Recipes.list_recipes()
 
     {:ok,
      socket
      |> assign(:page_title, "Listing Recipes")
-     |> assign(:recipes, [])
      |> assign(:q, "")
-     |> stream(:recipes, list_recipes())}
+     |> stream(:recipes, recipes)}
   end
 
   @impl true
@@ -88,14 +65,12 @@ defmodule AppWeb.RecipeLive.Index do
   def handle_event("search", %{"query" => q}, socket) do
     recipes =
       q
-      |> App.Recipes.search_recipes()
+      |> Recipes.search_recipes()
 
     dbg("Recipes found: #{inspect(recipes)}")
 
-    {:noreply, assign(socket, :recipes, recipes)}
-  end
-
-  defp list_recipes() do
-    Recipes.list_recipes()
+    {:noreply,
+     socket
+     |> stream(:recipes, recipes, reset: true)}
   end
 end
