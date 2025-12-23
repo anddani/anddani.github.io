@@ -14,7 +14,6 @@ defmodule AppWeb.RecipeLive.Show do
             <.icon name="hero-arrow-left" />
           </.button>
         </:actions>
-        <:subtitle>This is a recipe record from your database.</:subtitle>
       </.header>
 
       <.list>
