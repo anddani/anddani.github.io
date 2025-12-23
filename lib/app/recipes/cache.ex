@@ -38,6 +38,20 @@ defmodule App.Recipes.Cache do
     GenServer.call(__MODULE__, :reload)
   end
 
+  @doc """
+  Clears all recipes from the cache. Used for testing.
+  """
+  def clear do
+    GenServer.call(__MODULE__, :clear)
+  end
+
+  @doc """
+  Adds a recipe to the cache. Used for testing.
+  """
+  def put_recipe(recipe) do
+    GenServer.call(__MODULE__, {:put_recipe, recipe})
+  end
+
   # Server callbacks
 
   @impl true
@@ -61,6 +75,16 @@ defmodule App.Recipes.Cache do
   def handle_call(:reload, _from, _state) do
     recipes = load_recipes()
     {:reply, :ok, %{recipes: recipes}}
+  end
+
+  @impl true
+  def handle_call(:clear, _from, _state) do
+    {:reply, :ok, %{recipes: []}}
+  end
+
+  @impl true
+  def handle_call({:put_recipe, recipe}, _from, state) do
+    {:reply, :ok, %{state | recipes: [recipe | state.recipes]}}
   end
 
   # Private functions

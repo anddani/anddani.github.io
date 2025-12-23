@@ -25,6 +25,16 @@ defmodule App.RecipesFixtures do
       })
       |> App.Recipes.create_recipe()
 
+    # Also add to cache so list_recipes/0 returns it
+    App.Recipes.Cache.put_recipe(recipe)
+
     recipe
+  end
+
+  @doc """
+  Clears the recipe cache. Call this in test setup.
+  """
+  def clear_recipe_cache do
+    App.Recipes.Cache.clear()
   end
 end

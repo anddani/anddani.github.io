@@ -8,6 +8,11 @@ defmodule App.RecipesTest do
 
     import App.RecipesFixtures
 
+    setup do
+      clear_recipe_cache()
+      :ok
+    end
+
     @invalid_attrs %{
       instructions: nil,
       title: nil,
