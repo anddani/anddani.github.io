@@ -10,11 +10,6 @@ defmodule AppWeb.RecipeLive.Index do
       <div class="flex flex-col h-full">
         <.header>
           Recipes
-          <:actions>
-            <.button variant="primary" navigate={~p"/recipes/new"}>
-              <.icon name="hero-plus" /> New Recipe
-            </.button>
-          </:actions>
         </.header>
 
         <div>
@@ -50,6 +45,7 @@ defmodule AppWeb.RecipeLive.Index do
      socket
      |> assign(:page_title, "Listing Recipes")
      |> assign(:q, "")
+     |> stream_configure(:recipes, dom_id: &"recipe-#{&1.slug}")
      |> stream(:recipes, recipes)}
   end
 
@@ -63,9 +59,7 @@ defmodule AppWeb.RecipeLive.Index do
 
   @impl true
   def handle_event("search", %{"query" => q}, socket) do
-    recipes =
-      q
-      |> Recipes.search_recipes()
+    recipes = Recipes.search_recipes(q)
 
     dbg("Recipes found: #{inspect(recipes)}")
 

@@ -10,24 +10,26 @@ defmodule App.Recipes do
 
   @recipes_path Path.join([:code.priv_dir(:app), "static", "recipes"])
 
-  @doc """
-  Returns the recipe from a file.
-
-  ## Examples
-
-      iex> get_recipe_from_file!("recipe.yaml")
-      %Recipe{}
-
-  """
   defp get_recipe_from_file!(recipe_filename) do
     slug = Path.basename(recipe_filename, ".yaml")
-
     recipe_path = Path.join(@recipes_path, recipe_filename)
-    recipe_attrs = YamlElixir.read_from_file!(recipe_path, atoms: true)
-    |> Map.put(:slug, slug)
 
-    changeset = Recipe.changeset(%Recipe{}, recipe_attrs)
-    changeset.changes
+    recipe_attrs =
+      YamlElixir.read_from_file!(recipe_path, atoms: true)
+      |> Map.put(:slug, slug)
+
+    validated =
+      %Recipe{}
+      |> Recipe.changeset(recipe_attrs)
+      |> Ecto.Changeset.apply_action(:validate)
+
+    case validated do
+      {:ok, recipe} ->
+        recipe
+
+      {:error, changeset} ->
+        raise "Invalid recipe #{recipe_filename}: #{inspect(changeset.errors)}"
+    end
   end
 
   @doc """
@@ -43,7 +45,7 @@ defmodule App.Recipes do
     File.ls!(@recipes_path)
     |> Task.async_stream(&get_recipe_from_file!/1, max_concurrency: 10)
     |> Enum.to_list()
-    |> Enum.map(fn {:ok, recipe} -> recipe end)
+    |> Enum.map(fn {:ok, value} -> value end)
   end
 
   @doc """
@@ -137,6 +139,12 @@ defmodule App.Recipes do
 
   """
   def search_recipes(query) do
-    Repo.all(from(r in Recipe, where: like(r.title, ^"%#{query}%")))
+    # TODO: Use GenServer to read recipes once
+    recipes = list_recipes()
+    query_downcase = String.downcase(query)
+
+    Enum.filter(recipes, fn recipe ->
+      String.contains?(String.downcase(recipe.title), query_downcase)
+    end)
   end
 end
