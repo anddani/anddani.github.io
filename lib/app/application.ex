@@ -13,8 +13,7 @@ defmodule App.Application do
       {Ecto.Migrator, repos: Application.fetch_env!(:app, :ecto_repos), skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:app, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: App.PubSub},
-      # Start a worker by calling: App.Worker.start_link(arg)
-      # {App.Worker, arg},
+      App.Recipes.Cache,
       # Start to serve requests, typically the last entry
       AppWeb.Endpoint
     ]
