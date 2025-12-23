@@ -1,0 +1,21 @@
+{
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "includeLanguages": {
+          "elixir": "html",
+          "heex": "html"
+        },
+        "experimental": {
+          "configFile": "assets/css/app.css",
+          "classRegex": [
+            "\\bclass:\\s*['\"]([^'\"]*)['\"]",
+            "\\b[a-z]+_class=['\"]([^'\"]*)['\"]",
+            "\\bicon=['\"](hero-[^'\"]*)['\"]",
+            "\\bicon=['\"](phosphor-[^'\"]*)['\"]"
+          ]
+        }
+      }
+    }
+  }
+}
