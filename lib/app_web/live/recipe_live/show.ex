@@ -8,21 +8,16 @@ defmodule AppWeb.RecipeLive.Show do
     ~H"""
     <Layouts.app flash={@flash}>
       <.header>
-        Recipe {@recipe.id}
-        <:subtitle>This is a recipe record from your database.</:subtitle>
+        Recipe {@recipe.title}
         <:actions>
           <.button navigate={~p"/recipes"}>
             <.icon name="hero-arrow-left" />
           </.button>
-          <.button variant="primary" navigate={~p"/recipes/#{@recipe}/edit?return_to=show"}>
-            <.icon name="hero-pencil-square" /> Edit recipe
-          </.button>
         </:actions>
+        <:subtitle>This is a recipe record from your database.</:subtitle>
       </.header>
 
       <.list>
-        <:item title="Title">{@recipe.title}</:item>
-        <:item title="Slug">{@recipe.slug}</:item>
         <:item title="Ingredients">{@recipe.ingredients}</:item>
         <:item title="Instructions">{@recipe.instructions}</:item>
         <:item title="Tags">{@recipe.tags}</:item>
@@ -34,9 +29,11 @@ defmodule AppWeb.RecipeLive.Show do
 
   @impl true
   def mount(%{"id" => id}, _session, socket) do
+    dbg(Recipes.get_recipe_by_slug(id))
+
     {:ok,
      socket
      |> assign(:page_title, "Show Recipe")
-     |> assign(:recipe, Recipes.get_recipe!(id))}
+     |> assign(:recipe, Recipes.get_recipe_by_slug(id))}
   end
 end

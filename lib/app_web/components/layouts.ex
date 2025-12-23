@@ -36,13 +36,7 @@ defmodule AppWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <canvas
-      id="canvas"
-      class="bg-black fixed z-[-1] top-0 left-0"
-      phx-update="ignore"
-    >
-      Your browser does not support the HTML5 canvas tag.
-    </canvas>
+    <div class="fixed inset-0 z-[-1] bg-black bg-[url('/images/stars.png')] bg-no-repeat bg-left-top"></div>
 
     <div class="flex flex-col h-screen max-w-dvw">
       <header class="w-full px-4 pt-3 pb-6 sm:px-6 lg:px-8 bg-transparent border-b-gray-600 border-b-2">
