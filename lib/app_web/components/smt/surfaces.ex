@@ -1,4 +1,4 @@
-defmodule AppWeb.Surfaces do
+defmodule AppWeb.Smt.Surfaces do
   use Phoenix.Component
 
   use AppWeb, :verified_routes
@@ -25,7 +25,7 @@ defmodule AppWeb.Surfaces do
   def frame(assigns) do
     ~H"""
     <div class={[
-      "border-2 border-2",
+      "border-2",
       "border-b-gray-600 border-r-gray-600 border-l-gray-300 border-t-gray-300 bg-white/15",
       @clickable &&
         "active:bg-white/20 active:border-b-gray-300 active:border-r-gray-300 active:border-l-gray-600 active:border-t-gray-600",

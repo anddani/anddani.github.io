@@ -1,7 +1,10 @@
-defmodule AppWeb.SmtLayouts do
+defmodule AppWeb.Smt.Layouts do
   use Phoenix.Component
   alias AppWeb.Surfaces
-  alias AppWeb.ButtonLayouts
+
+  alias AppWeb.Smt.Buttons
+  alias AppWeb.Smt.Surfaces
+
   alias App.Recipes.Recipe
 
   use AppWeb, :verified_routes
@@ -39,8 +42,8 @@ defmodule AppWeb.SmtLayouts do
       <div class="flex flex-row min-h-0 h-full">
         <nav class="p-4 border-r-gray-600 border-r-2 shrink-0">
           <ul class="flex flex-col gap-2">
-            <li><ButtonLayouts.recipes /></li>
-            <li><ButtonLayouts.sakelog /></li>
+            <li><Buttons.recipes /></li>
+            <li><Buttons.sakelog /></li>
           </ul>
         </nav>
 

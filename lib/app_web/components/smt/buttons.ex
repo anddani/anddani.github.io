@@ -1,6 +1,7 @@
-defmodule AppWeb.ButtonLayouts do
+defmodule AppWeb.Smt.Buttons do
   use Phoenix.Component
-  alias AppWeb.Surfaces
+
+  alias AppWeb.Smt.Surfaces
 
   use AppWeb, :verified_routes
 
