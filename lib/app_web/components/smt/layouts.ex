@@ -30,7 +30,8 @@ defmodule AppWeb.Smt.Layouts do
   def app(assigns) do
     # TODO: Set font to smt font here. Not globally
     ~H"""
-    <div class="fixed inset-0 z-[-1] bg-black bg-[url('/images/stars.png')] bg-no-repeat bg-top-left"></div>
+    <div class="fixed inset-0 z-[-1] bg-black bg-[url('/images/stars.png')] bg-no-repeat bg-top-left">
+    </div>
 
     <div class="flex flex-col h-screen max-w-dvw">
       <header class="w-full px-4 pt-3 pb-6 sm:px-6 lg:px-8 bg-transparent border-b-gray-600 border-b-2">

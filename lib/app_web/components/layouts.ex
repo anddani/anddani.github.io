@@ -46,7 +46,7 @@ defmodule AppWeb.Layouts do
       <div class="flex flex-row min-h-0 h-full">
         <nav class="p-4 border-r-gray-600 border-r-2 shrink-0">
           <ul class="flex flex-col gap-2">
-          <!--
+            <!--
             <li><ButtonLayouts.recipes /></li>
             <li><ButtonLayouts.sakelog /></li>
             -->
