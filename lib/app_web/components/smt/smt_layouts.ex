@@ -1,4 +1,4 @@
-defmodule AppWeb.App do
+defmodule AppWeb.SmtLayouts do
   use Phoenix.Component
   alias AppWeb.Surfaces
   alias AppWeb.ButtonLayouts
@@ -24,7 +24,7 @@ defmodule AppWeb.App do
 
   slot(:inner_block, required: true)
 
-  def app_smt(assigns) do
+  def app(assigns) do
     # TODO: Set font to smt font here. Not globally
     ~H"""
     <div class="fixed inset-0 z-[-1] bg-black bg-[url('/images/stars.png')] bg-no-repeat bg-top-left"></div>

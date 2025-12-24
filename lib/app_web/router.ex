@@ -2,27 +2,29 @@ defmodule AppWeb.Router do
   use AppWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, html: {AppWeb.Layouts, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:put_root_layout, html: {AppWeb.Layouts, :root})
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", AppWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
-    get "/", PageController, :home
+    get("/", PageController, :home)
 
-    live "/recipes", RecipeLive.Index, :index
-    live "/recipes/new", RecipeLive.Form, :new
-    live "/recipes/:id", RecipeLive.Show, :show
-    live "/recipes/:id/edit", RecipeLive.Form, :edit
+    live("/recipes", RecipeLive.Index, :index)
+    live("/recipes/new", RecipeLive.Form, :new)
+    live("/recipes/:id", RecipeLive.Show, :show)
+    live("/recipes/:id/edit", RecipeLive.Form, :edit)
+
+    get("/smt", SmtController, :index)
   end
 
   # Other scopes may use custom stacks.
@@ -40,10 +42,10 @@ defmodule AppWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      live_dashboard "/dashboard", metrics: AppWeb.Telemetry
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      live_dashboard("/dashboard", metrics: AppWeb.Telemetry)
+      forward("/mailbox", Plug.Swoosh.MailboxPreview)
     end
   end
 end
