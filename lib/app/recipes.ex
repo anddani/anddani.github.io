@@ -4,7 +4,6 @@ defmodule App.Recipes do
   """
 
   import Ecto.Query, warn: false
-  alias App.Repo
 
   alias App.Recipes.Recipe
   alias App.Recipes.Cache
