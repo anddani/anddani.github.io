@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$title$ — sake.log</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .sakura-bg {
+      background-color: #fdf6f0;
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='%23f9a8c4' opacity='0.18'><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(0 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(72 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(144 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(216 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(288 60 60)'/></g></svg>");
+      background-size: 120px 120px;
+    }
+    [data-theme=dark] .sakura-bg {
+      background-color: #1a1218;
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='%23f9a8c4' opacity='0.08'><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(0 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(72 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(144 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(216 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(288 60 60)'/></g></svg>");
+    }
+    .prose p { margin-top: 1em; margin-bottom: 1em; line-height: 1.75; }
+    .prose h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1.5em; margin-bottom: 0.5em; }
+    .prose ul { list-style: disc; padding-left: 1.5em; margin-top: 0.5em; margin-bottom: 0.5em; }
+    .prose li { margin-top: 0.25em; }
+  </style>
+</head>
+
+<body class="sakura-bg font-mincho min-h-screen text-stone-900 dark:text-stone-100">
+
+  <!-- Theme toggle (top-right, fixed) -->
+  <button id="theme-toggle"
+    class="fixed right-3 top-3 z-50 cursor-pointer border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-stone-50 px-3 py-1 text-sm font-mincho active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600 dark:bg-stone-800 dark:text-stone-100">
+    ◐
+  </button>
+
+  <div class="mx-auto max-w-2xl px-6 py-12">
+
+    <!-- Back link -->
+    <a href="/sake.log" class="text-sm text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-200">← sake.log</a>
+
+    <!-- Header -->
+    <div class="mt-6 mb-8 flex gap-6 items-start">
+      $if(thumbnail)$
+      <img src="$thumbnail$" alt="$title$" class="w-28 h-28 object-cover shrink-0 border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300" />
+      $endif$
+      <div class="flex flex-col gap-2">
+        <h1 class="text-3xl font-bold">$title$</h1>
+        <p class="text-sm text-stone-500 dark:text-stone-400">$date$</p>
+        <p class="text-base font-bold">★ $rating$ / 5</p>
+      </div>
+    </div>
+
+    <!-- Metadata table -->
+    <div class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-white/60 dark:bg-stone-900/60 mb-8">
+      <table class="w-full text-sm">
+        <tbody>
+          $if(type)$
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400 w-32">Type</td>
+            <td class="px-4 py-2">$type$</td>
+          </tr>
+          $endif$
+          $if(polish)$
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400 w-32">Polish</td>
+            <td class="px-4 py-2">$polish$</td>
+          </tr>
+          $endif$
+          $if(abv)$
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400 w-32">ABV</td>
+            <td class="px-4 py-2">$abv$</td>
+          </tr>
+          $endif$
+          $if(smv)$
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400 w-32">SMV</td>
+            <td class="px-4 py-2">$smv$</td>
+          </tr>
+          $endif$
+          $if(acidity)$
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400 w-32">Acidity</td>
+            <td class="px-4 py-2">$acidity$</td>
+          </tr>
+          $endif$
+          $if(notes)$
+          <tr>
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400 w-32">Notes</td>
+            <td class="px-4 py-2">$notes$</td>
+          </tr>
+          $endif$
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Review body -->
+    <div class="prose">
+      $body$
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("theme-toggle");
+      var html = document.documentElement;
+      var stored = localStorage.getItem("theme");
+      if (stored) html.setAttribute("data-theme", stored);
+      btn.addEventListener("click", function () {
+        var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+    })();
+  </script>
+</body>
+
+</html>

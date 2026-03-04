@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sake.log</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .sakura-bg {
+      background-color: #fdf6f0;
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='%23f9a8c4' opacity='0.18'><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(0 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(72 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(144 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(216 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(288 60 60)'/></g></svg>");
+      background-size: 120px 120px;
+    }
+    [data-theme=dark] .sakura-bg {
+      background-color: #1a1218;
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='%23f9a8c4' opacity='0.08'><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(0 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(72 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(144 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(216 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(288 60 60)'/></g></svg>");
+    }
+  </style>
+</head>
+
+<body class="sakura-bg font-mincho min-h-screen text-stone-900 dark:text-stone-100">
+
+  <!-- Theme toggle (top-right, fixed) -->
+  <button id="theme-toggle"
+    class="fixed right-3 top-3 z-50 cursor-pointer border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-stone-50 px-3 py-1 text-sm font-mincho active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600 dark:bg-stone-800 dark:text-stone-100">
+    ◐
+  </button>
+
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <!-- Back link -->
+    <a href="/" class="text-sm text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-200">← home</a>
+
+    <!-- Header -->
+    <h1 class="mt-4 mb-8 text-4xl font-bold tracking-tight">sake.log</h1>
+
+    <!-- Review list -->
+    <ul class="flex flex-col gap-6">
+      $for(sakes)$
+      <li>
+        <a href="$url$" class="block">
+          <div class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-white/60 p-4 dark:bg-stone-900/60 hover:bg-white/80 dark:hover:bg-stone-900/80 active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600">
+            <div class="flex gap-4 items-start">
+              $if(thumbnail)$
+              <img src="$thumbnail$" alt="$title$" class="w-20 h-20 object-cover shrink-0 border border-stone-300 dark:border-stone-600" />
+              $endif$
+              <div class="flex flex-col gap-1 min-w-0">
+                <span class="text-lg font-bold">$title$</span>
+                <span class="text-sm text-stone-500 dark:text-stone-400">$type$ · $date$</span>
+                <span class="text-sm mt-1">★ $rating$ / 5</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+      $endfor$
+    </ul>
+
+  </div>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("theme-toggle");
+      var html = document.documentElement;
+      var stored = localStorage.getItem("theme");
+      if (stored) html.setAttribute("data-theme", stored);
+      btn.addEventListener("click", function () {
+        var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+    })();
+  </script>
+</body>
+
+</html>

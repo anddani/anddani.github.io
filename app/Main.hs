@@ -2,6 +2,11 @@
 
 import Hakyll
 
+sakeCtx :: Context String
+sakeCtx =
+     dateField "date" "%B %e, %Y"
+  <> defaultContext
+
 main :: IO ()
 main = hakyll $ do
   match "assets/**" $ do
@@ -19,3 +24,21 @@ main = hakyll $ do
     compile $ pandocCompiler
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
+
+  match "sake/*.md" $ do
+    route   $ setExtension "html"
+    compile $ pandocCompiler
+      >>= loadAndApplyTemplate "templates/sake-layout.html" sakeCtx
+      >>= relativizeUrls
+
+  create ["sake.log/index.html"] $ do
+    route idRoute
+    compile $ do
+      sakes <- recentFirst =<< loadAll "sake/*.md"
+      let listCtx =
+            listField "sakes" sakeCtx (return sakes)
+            <> constField "title" "sake.log"
+            <> defaultContext
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/sake-list.html" listCtx
+        >>= relativizeUrls
