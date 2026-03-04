@@ -4,7 +4,7 @@ import Hakyll
 
 main :: IO ()
 main = hakyll $ do
-  match "images/*" $ do
+  match "assets/**" $ do
     route   idRoute
     compile copyFileCompiler
 
@@ -17,5 +17,5 @@ main = hakyll $ do
   match "index.md" $ do
     route   $ setExtension "html"
     compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/default.html" defaultContext
+      >>= loadAndApplyTemplate "templates/landing.html" defaultContext
       >>= relativizeUrls
