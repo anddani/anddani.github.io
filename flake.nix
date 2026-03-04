@@ -42,7 +42,7 @@
             pkgs.haskell.lib.addBuildTools drv [
               hpkgs.cabal-install
               hpkgs.haskell-language-server
-              pkgs.tailwindcss
+              pkgs.tailwindcss_4
             ];
         };
       });
