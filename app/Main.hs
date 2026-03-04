@@ -17,5 +17,5 @@ main = hakyll $ do
   match "index.md" $ do
     route   $ setExtension "html"
     compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/landing.html" defaultContext
+      >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
