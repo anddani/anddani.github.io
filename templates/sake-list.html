@@ -9,12 +9,46 @@
   <style>
     .sakura-bg {
       background-color: #fdf6f0;
-      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='%23f9a8c4' opacity='0.18'><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(0 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(72 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(144 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(216 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(288 60 60)'/></g></svg>");
-      background-size: 120px 120px;
+      position: relative;
+      isolation: isolate;
+    }
+    .sakura-bg::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image:
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png'),
+        url('/assets/petal.png');
+      background-repeat: no-repeat;
+      background-position:
+        4% 6%, 14% 15%, 20% 28%, 32% 42%, 42% 14%, 52% 24%, 58% 42%, 70% 8%,
+        28% 58%, 45% 70%, 66% 28%, 82% 42%, 78% 68%, 18% 78%, 60% 85%, 90% 88%;
+      background-size:
+        48px, 42px, 44px, 38px, 40px, 46px, 52px, 44px,
+        38px, 42px, 46px, 40px, 44px, 36px, 48px, 40px;
     }
     [data-theme=dark] .sakura-bg {
       background-color: #1a1218;
-      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='%23f9a8c4' opacity='0.08'><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(0 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(72 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(144 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(216 60 60)'/><ellipse cx='60' cy='45' rx='12' ry='22' transform='rotate(288 60 60)'/></g></svg>");
+    }
+    [data-theme=dark] .sakura-bg::before {
+      opacity: 0.18;
     }
   </style>
 </head>

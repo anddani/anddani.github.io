@@ -43,6 +43,7 @@
               hpkgs.cabal-install
               hpkgs.haskell-language-server
               pkgs.tailwindcss_4
+              pkgs.imagemagick
             ];
         };
       });
