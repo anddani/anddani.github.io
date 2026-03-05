@@ -21,9 +21,14 @@ main = hakyll $ do
 
   match "index.md" $ do
     route   $ setExtension "html"
-    compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/default.html" defaultContext
-      >>= relativizeUrls
+    compile $ do
+      sakes <- recentFirst =<< loadAll "sake/*.md"
+      let indexCtx =
+            listField "latestSake" sakeCtx (return $ take 2 sakes)
+            <> defaultContext
+      pandocCompiler
+        >>= loadAndApplyTemplate "templates/default.html" indexCtx
+        >>= relativizeUrls
 
   match "sake/*.md" $ do
     route   $ setExtension "html"
