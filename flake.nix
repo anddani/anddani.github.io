@@ -19,7 +19,7 @@
         website = pkgs.stdenv.mkDerivation {
           name = "website";
           src = ./.;
-          nativeBuildInputs = [ generator pkgs.tailwindcss ];
+          nativeBuildInputs = [ generator pkgs.tailwindcss_4 ];
           buildPhase = ''
             tailwindcss -i css/input.css -o css/style.css --minify
             site build
