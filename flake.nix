@@ -20,6 +20,8 @@
           name = "website";
           src = ./.;
           nativeBuildInputs = [ generator pkgs.tailwindcss_4 ];
+          LANG = "C.UTF-8";
+          LC_ALL = "C.UTF-8";
           buildPhase = ''
             tailwindcss -i css/input.css -o css/style.css --minify
             site build
