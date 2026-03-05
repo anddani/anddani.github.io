@@ -8,8 +8,11 @@ smv: "+5"
 acidity: "1.5"
 notes: Strawberry · Buckwheat hull · Oolong tea
 rating: "3"
+image: /assets/img/ozeki_one_cup.JPG
 thumbnail: /assets/img/ozeki_one_cup_thumbnail.JPG
 ---
+
+> Fun fact TODO
 
 Initial notes of strawberry and a slight bitter taste of Oolong tea. The finish is quick and has a hint of earthy buckwheat. It is also rather well balanced and "easy" to gulp down.
 
