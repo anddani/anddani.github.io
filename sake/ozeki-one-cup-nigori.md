@@ -12,6 +12,6 @@ image: /assets/img/ozeki_one_cup_nigori.JPG
 thumbnail: /assets/img/ozeki_one_cup_nigori_thumbnail.JPG
 ---
 
-> Fun fact TODO
+> INFO ABOUT NIGORI
 
 Nope. Not for me.

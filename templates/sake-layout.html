@@ -55,6 +55,9 @@
     .prose ul { list-style: disc; padding-left: 1.5em; margin-top: 0.5em; margin-bottom: 0.5em; }
     .prose li { margin-top: 0.25em; }
     .prose a { color: #2563eb; text-decoration: underline; }
+    .prose blockquote { border: 2px solid; border-color: #d1d5db #4b5563 #4b5563 #d1d5db; background: rgba(253,246,240,0.8); padding: 0 1em; margin: 1em 0; font-style: normal; }
+    .prose blockquote p:first-child::before { content: "※ "; }
+    [data-theme=dark] .prose blockquote { background: rgba(40,30,25,0.8); border-color: #57534e #292524 #292524 #57534e; }
   </style>
 </head>
 

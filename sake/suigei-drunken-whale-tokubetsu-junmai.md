@@ -12,7 +12,7 @@ image: /assets/img/suigei_tokubetsu_junmai.JPG
 thumbnail: /assets/img/suigei_tokubetsu_junmai_thumbnail.JPG
 ---
 
-# > Fun fact TODO 
+> Fun fact TODO 
 
 [Suigei Brewery](https://takasan.co/pages/suigei-brewery)
 
