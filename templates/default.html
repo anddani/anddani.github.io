@@ -30,7 +30,7 @@
 
       <!-- Name & social links -->
       <div class="flex flex-col gap-4">
-        <span class="text-2xl font-bold">André Danielsson</span>
+        <span class="text-3xl font-bold">André Danielsson</span>
         <ul class="flex gap-3">
           <li>
             <a href="https://github.com/anddani/" title="GitHub" class="hover:text-stone-900 dark:hover:text-stone-100">
@@ -69,7 +69,7 @@
 
       <hr class="border-stone-700 dark:border-stone-300" />
 
-      <ul class="flex flex-col gap-2 text-base font-bold pb-1">
+      <ul class="flex flex-col gap-2 text-lg font-bold pb-1">
         <li class="flex gap-3">
           <svg class="w-4 h-4 shrink-0 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -116,7 +116,7 @@
             class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-white/30 py-1 pr-4 active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600 active:bg-white/40">
             <div class="inline-flex items-center gap-2">
               <img src="/assets/tokkuri.png" alt="" class="size-16" style="image-rendering: pixelated" />
-              <span class="text-base">sake.log</span>
+              <span class="text-lg">sake.log</span>
             </div>
           </div>
         </a>
@@ -169,12 +169,12 @@
     <main class="flex flex-col gap-8 p-8">
 
       <section class="flex flex-col gap-3">
-        <h2 class="border-b border-stone-300 pb-1 text-base font-bold dark:border-stone-600">Projects</h2>
+        <h2 class="border-b border-stone-300 pb-1 text-lg font-bold dark:border-stone-600">Projects</h2>
         <div
-          class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-base text-stone-700 dark:text-stone-300">
+          class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-lg text-stone-700 dark:text-stone-300">
           [Project placeholder]</div>
         <div
-          class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-base text-stone-700 dark:text-stone-300">
+          class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-lg text-stone-700 dark:text-stone-300">
           [Project placeholder]</div>
       </section>
 
@@ -186,7 +186,7 @@
       <!-- </section> -->
 
       <section class="flex flex-col gap-3">
-        <h2 class="border-b border-stone-300 pb-1 text-base font-bold dark:border-stone-600">Latest from <a href="/sake.log" class="underline text-[#2563eb]">sake.log</a></h2>
+        <h2 class="border-b border-stone-300 pb-1 text-lg font-bold dark:border-stone-600">Latest from <a href="/sake.log" class="underline text-[#2563eb]">sake.log</a></h2>
         $for(latestSake)$
         <a href="$url$" class="block">
           <div class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600">
@@ -196,7 +196,7 @@
               $endif$
               <div class="flex flex-col gap-1">
                 <span class="font-bold">$title$</span>
-                <span class="text-sm">$type$ · $date$ · ★ $rating$</span>
+                <span class="text-base">$type$ · $date$ · ★ $rating$</span>
               </div>
             </div>
           </div>
