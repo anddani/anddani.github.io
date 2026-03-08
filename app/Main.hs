@@ -31,7 +31,7 @@ main = hakyll $ do
         >>= relativizeUrls
 
   match "sake/*.md" $ do
-    route   $ setExtension "html"
+    route   $ gsubRoute "sake/" (const "sake.log/") `composeRoutes` setExtension "html"
     compile $ pandocCompiler
       >>= loadAndApplyTemplate "templates/sake-layout.html" sakeCtx
       >>= relativizeUrls
