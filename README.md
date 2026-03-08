@@ -12,4 +12,8 @@ cabal run site -- watch
 tailwindcss -i css/input.css -o css/style.css --watch
 ```
 
+Generate thumbnails:
+```sh
+cabal run make-thumbnails -- --force
+```
 
