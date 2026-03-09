@@ -20,16 +20,14 @@
 
     <!-- ── Left column ── -->
     <aside
-      class="flex flex-col gap-4 border-b border-stone-300 bg-stone-50 p-5 dark:border-stone-700 dark:bg-stone-800 md:border-b-0 md:border-r">
+      class="flex flex-col gap-4 border-b border-stone-300 bg-stone-50 p-5 dark:border-stone-700 dark:bg-stone-800 md:border-b-0 md:border-r items-center">
 
-      <!-- Avatar placeholder -->
-      <div
-        class="flex h-20 w-20 items-center justify-center border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-stone-200 text-sm text-stone-400 dark:bg-stone-700">
-        AVATAR
-      </div>
+      <!-- Avatar: portrait on desktop, landscape on mobile -->
+      <img src="/assets/avatar_desktop.png" alt="" class="hidden md:block max-w-[200px]" style="image-rendering: pixelated" />
+      <img src="/assets/avatar_mobile.png" alt="" class="block md:hidden " style="image-rendering: pixelated" />
 
       <!-- Name & social links -->
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 items-center">
         <span class="text-3xl font-bold">André Danielsson</span>
         <ul class="flex gap-3">
           <li>
@@ -67,9 +65,9 @@
         </ul>
       </div>
 
-      <hr class="border-stone-700 dark:border-stone-300" />
+      <hr class="border-stone-700 dark:border-stone-300 w-full" />
 
-      <ul class="flex flex-col gap-2 text-lg font-bold pb-1">
+      <ul class="flex flex-col gap-2 text-lg font-bold pb-1 w-full">
         <li class="flex gap-3">
           <svg class="w-4 h-4 shrink-0 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -99,7 +97,7 @@
       <hr class="border-stone-700 dark:border-stone-300" />
 
       <!-- Navigation -->
-      <nav class="flex flex-col gap-2">
+      <nav class="flex flex-col gap-2 w-full">
 
         <!-- <a href="/b.log" class="block"> -->
           <!-- <div -->
