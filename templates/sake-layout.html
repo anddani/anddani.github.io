@@ -77,7 +77,12 @@
     <!-- Header -->
     <div class="mt-6 mb-8 flex flex-col sm:flex-row gap-6 items-start">
       $if(image)$
-      <img src="$image$" alt="$title$" class="w-[300px] shrink-0 border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300" />
+      <button onclick="document.getElementById('lightbox').classList.remove('hidden')" class="w-[300px] shrink-0 cursor-zoom-in group">
+        <img src="$image$" alt="$title$" class="w-full border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 group-hover:opacity-90 transition-opacity" />
+      </button>
+      <div id="lightbox" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-zoom-out p-4" onclick="this.classList.add('hidden')">
+        <img src="$image$" alt="$title$" class="max-h-full max-w-full object-contain border-2 border-stone-600" />
+      </div>
       $endif$
       <div class="flex flex-col gap-2">
         <h1 class="text-3xl font-bold">$title$</h1>
@@ -138,6 +143,9 @@
   </div>
 
   <script>
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') document.getElementById('lightbox').classList.add('hidden');
+    });
     document.querySelectorAll('.prose a').forEach(function(a) {
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener noreferrer');
