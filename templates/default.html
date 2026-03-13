@@ -167,13 +167,21 @@
     <main class="flex flex-col gap-8 p-8">
 
       <section class="flex flex-col gap-3">
-        <h2 class="border-b border-stone-300 pb-1 text-lg font-bold dark:border-stone-600">Projects</h2>
-        <div
-          class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-lg text-stone-700 dark:text-stone-300">
-          [Project placeholder]</div>
-        <div
-          class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-lg text-stone-700 dark:text-stone-300">
-          [Project placeholder]</div>
+        <h2 class="border-b border-stone-300 pb-1 text-2xl font-bold dark:border-stone-600">Projects</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+          <a href="https://github.com/anddani/magi" class="block" target="_blank" rel="noopener noreferrer">
+            <div class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600">
+              <div class="flex gap-3 items-center mb-3">
+                <img src="/assets/magi_icon.png" alt="" class="size-12 shrink-0" style="image-rendering: pixelated" />
+                <div class="flex flex-col gap-1">
+                  <span class="font-bold text-2xl">Magi</span>
+                  <span class="text-base">A terminal-based Git client — keyboard-driven TUI inspired by Magit</span>
+                </div>
+              </div>
+              <img src="/assets/magi_showcase.gif" alt="magi showcase" class="w-full" />
+            </div>
+          </a>
+        </div>
       </section>
 
       <!-- <section class="flex flex-col gap-3"> -->
@@ -184,22 +192,24 @@
       <!-- </section> -->
 
       <section class="flex flex-col gap-3">
-        <h2 class="border-b border-stone-300 pb-1 text-lg font-bold dark:border-stone-600">Latest from <a href="/sake.log" class="underline text-[#2563eb]">sake.log</a></h2>
-        $for(latestSake)$
-        <a href="$url$" class="block">
-          <div class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600">
-            <div class="flex gap-3 items-center">
-              $if(thumbnail)$
-              <img src="$thumbnail$" alt="$title$" class="w-24 shrink-0" style="image-rendering: pixelated" />
-              $endif$
-              <div class="flex flex-col gap-1">
-                <span class="font-bold">$title$</span>
-                <span class="text-base">$type$ · $date$ · ★ $rating$</span>
+        <h2 class="border-b border-stone-300 pb-1 text-2xl font-bold dark:border-stone-600">Latest from <a href="/sake.log" class="underline text-[#2563eb]">sake.log</a></h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+          $for(latestSake)$
+          <a href="$url$" class="block">
+            <div class="border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 p-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600">
+              <div class="flex gap-3 items-center">
+                $if(thumbnail)$
+                <img src="$thumbnail$" alt="$title$" class="w-24 shrink-0" style="image-rendering: pixelated" />
+                $endif$
+                <div class="flex flex-col gap-1">
+                  <span class="font-bold">$title$</span>
+                  <span class="text-base">$type$ · $date$ · ★ $rating$</span>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-        $endfor$
+          </a>
+          $endfor$
+        </div>
       </section>
 
       <!-- <section class="flex flex-col gap-3"> -->
