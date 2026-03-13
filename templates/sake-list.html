@@ -69,6 +69,81 @@
     <!-- Header -->
     <h1 class="mt-4 mb-8 text-4xl font-bold tracking-tight">sake.log</h1>
 
+    <!-- Sake Grade Levels Table -->
+    <div class="mb-10 overflow-x-auto border-2 border-stone-400 dark:border-stone-600">
+      <div class="bg-amber-50 dark:bg-stone-800 py-3 px-4 text-center text-xl font-black tracking-widest border-b-2 border-stone-400 dark:border-stone-600 dark:text-stone-100">
+        SAKE GRADE LEVELS
+      </div>
+      <table class="w-full border-separate [border-spacing:3px] table-fixed text-center text-sm bg-stone-100 dark:bg-stone-900">
+        <thead>
+          <tr>
+            <th class="w-8 bg-stone-200 dark:bg-stone-700 border border-stone-300 dark:border-stone-600"></th>
+            <th class="bg-sky-200 px-3 py-2 border border-sky-300 align-top">
+              <div class="text-base font-black tracking-wide">NON-JUNMAI</div>
+              <div class="text-xs font-normal mt-1 leading-snug">Brewed using Rice, Water, Yeast, Koji Mold, and Distilled Brewers Alcohol.</div>
+            </th>
+            <th class="bg-amber-200 px-3 py-2 border border-amber-300 align-top">
+              <div class="text-base font-black tracking-wide">JUNMAI</div>
+              <div class="text-xs font-normal mt-1 leading-snug">"Pure Rice" — Brewed using ONLY Rice, Water, Yeast, and Koji Mold.</div>
+            </th>
+            <th class="bg-red-400 text-white px-3 py-2 border border-red-500 align-top">
+              <div class="text-base font-black tracking-wide">RICE MILLING</div>
+              <div class="text-xs font-normal mt-1 leading-snug">Rice polished down to:</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- DAIGINJO row -->
+          <tr>
+            <td rowspan="2" class="bg-stone-200 dark:bg-stone-700 border border-stone-300 dark:border-stone-600 [writing-mode:vertical-rl] rotate-180 text-[0.6rem] font-bold tracking-widest text-stone-500 dark:text-stone-300 px-1 py-2">
+              SUPER PREMIUM
+            </td>
+            <td class="bg-sky-200 px-3 py-3 border border-sky-300 font-extrabold tracking-wide">DAIGINJO</td>
+            <td class="bg-amber-200 px-3 py-3 border border-amber-300 font-extrabold tracking-wide">JUNMAI DAIGINJO</td>
+            <td class="bg-red-400 text-white px-3 py-3 border border-red-500">
+              <span class="text-xl font-black">50%</span> <span class="font-bold text-sm">OR LESS</span>
+              <div class="text-xs mt-1">(50% or more milled away)</div>
+            </td>
+          </tr>
+          <!-- GINJO row -->
+          <tr>
+            <td class="bg-sky-200 px-3 py-3 border border-sky-300 font-extrabold tracking-wide">GINJO</td>
+            <td class="bg-amber-200 px-3 py-3 border border-amber-300 font-extrabold tracking-wide">JUNMAI GINJO</td>
+            <td class="bg-red-400 text-white px-3 py-3 border border-red-500">
+              <span class="text-xl font-black">60%</span> <span class="font-bold text-sm">OR LESS</span>
+              <div class="text-xs mt-1">(40% or more milled away)</div>
+            </td>
+          </tr>
+          <!-- HONJOZO row -->
+          <tr>
+            <td class="bg-stone-200 dark:bg-stone-700 border border-stone-300 dark:border-stone-600 [writing-mode:vertical-rl] rotate-180 text-[0.6rem] font-bold tracking-widest text-stone-500 dark:text-stone-300 px-1 py-2">
+              PREMIUM
+            </td>
+            <td class="bg-sky-200 px-3 py-3 border border-sky-300 font-extrabold tracking-wide">HONJOZO</td>
+            <td rowspan="2" class="bg-amber-200 px-3 py-3 border border-amber-300 font-black tracking-wide text-lg align-middle">JUNMAI</td>
+            <td class="bg-red-400 text-white px-3 py-3 border border-red-500">
+              <span class="text-xl font-black">70%</span> <span class="font-bold text-sm">OR LESS</span>
+              <div class="text-xs mt-1">(30% or more milled away)</div>
+            </td>
+          </tr>
+          <!-- FUTSU-SHU row -->
+          <tr>
+            <td class="bg-stone-200 dark:bg-stone-700 border border-stone-300 dark:border-stone-600 [writing-mode:vertical-rl] rotate-180 text-[0.6rem] font-bold tracking-widest text-stone-500 dark:text-stone-300 px-1 py-2">
+              LOW GRADE
+            </td>
+            <td class="bg-stone-300 dark:bg-stone-600 px-3 py-3 border border-stone-400 dark:border-stone-500">
+              <div class="font-extrabold text-sm">FUTSU-SHU (Table Sake)</div>
+              <div class="text-xs mt-1 leading-snug">Usually mass produced with automated brewing processes and high amounts of distilled alcohol.</div>
+            </td>
+            <td class="bg-red-400 text-white px-3 py-3 border border-red-500">
+              <span class="text-xl font-black">70%+</span>
+              <div class="text-xs mt-1">(No requirement)</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- Review list -->
     <ul class="flex flex-col gap-6">
       $for(sakes)$
