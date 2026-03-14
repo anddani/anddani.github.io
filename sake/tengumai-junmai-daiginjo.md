@@ -7,7 +7,7 @@ abv: "15%"
 smv: "+3"
 acidity: "1.4"
 notes: Rose · Dandelion · Licorice · Raspberry
-rating: "4"
+rating: "3"
 image: /assets/img/tengumai_junmai_daiginjo.JPG
 thumbnail: /assets/img/tengumai_junmai_daiginjo_thumbnail.JPG
 ---

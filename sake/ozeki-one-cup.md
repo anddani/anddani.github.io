@@ -7,7 +7,7 @@ abv: "13.5%"
 smv: "+5"
 acidity: "1.5"
 notes: Strawberry · Buckwheat hull · Oolong tea
-rating: "3"
+rating: "2.5"
 image: /assets/img/ozeki_one_cup.JPG
 thumbnail: /assets/img/ozeki_one_cup_thumbnail.JPG
 ---

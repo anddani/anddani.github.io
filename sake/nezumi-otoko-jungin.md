@@ -7,7 +7,7 @@ abv: "16%"
 smv: "+15"
 acidity: "1.4"
 notes: Granny Smith · Pecan
-rating: "4"
+rating: "3.5"
 image: /assets/img/nezumi_otoko_jungin.JPG
 thumbnail: /assets/img/nezumi_otoko_jungin_thumbnail.JPG
 ---
