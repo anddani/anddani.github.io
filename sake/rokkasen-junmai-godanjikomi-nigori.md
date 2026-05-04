@@ -12,6 +12,6 @@ image: /assets/img/rokkasen_junmai_godanjikomi_nigori.JPG
 thumbnail: /assets/img/rokkasen_junmai_godanjikomi_nigori_thumbnail.JPG
 ---
 
-> Fun fact SMV/Nihonshu-do TODO
+> SMV, or "Sake Meter Value", is used to indicate the density of the liquid compared to water. It can be used to gauge how sweet or dry the sake is. Negative values means sweet, and positive means dry.
 
 TODO
