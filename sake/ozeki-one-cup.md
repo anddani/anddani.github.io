@@ -12,7 +12,7 @@ image: /assets/img/ozeki_one_cup.JPG
 thumbnail: /assets/img/ozeki_one_cup_thumbnail.JPG
 ---
 
-> Fun fact TODO
+> The format of "cup sake" was invented in 1964 for people to enjoy on the go, and served on the newly introduced Shinkansen line of trains.
 
 Initial notes of strawberry and a slight bitter taste of Oolong tea. The finish is quick and has a hint of earthy buckwheat. It is also rather well balanced and "easy" to gulp down.
 
