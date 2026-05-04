@@ -14,4 +14,4 @@ thumbnail: /assets/img/ozeki_one_cup_nigori_thumbnail.JPG
 
 > Nigorizake, or cloudy sake, is a type of sake that is not filtered and still contains rice particles (called ori), yeast cells, and enzymes.
 
-Nope. Not for me.
+Nope. Not for me. Way too sweet.
