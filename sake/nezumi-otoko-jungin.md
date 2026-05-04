@@ -12,6 +12,8 @@ image: /assets/img/nezumi_otoko_jungin.JPG
 thumbnail: /assets/img/nezumi_otoko_jungin_thumbnail.JPG
 ---
 
+> TODO
+
 Tottori Prefecture is famed all over Japan for a manga called “Gegege no Kitaroo”, a story featuring all kinds of ghosts, whose first episode was published back on October 10th, 1967.
 
-Very good. round and dry flavor. Great balance.
+Very good. Round and dry flavor. Great balance.
