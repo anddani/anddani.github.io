@@ -8,8 +8,8 @@ smv: "+3"
 acidity: "1.8"
 notes: Citrus · Chives
 rating: "3.0"
-image: /assets/img/tamano-hikari-junmai-ginjo.JPG
-thumbnail: /assets/img/tamano-hikari-junmai-ginjo_thumbnail.JPG
+image: /assets/img/tamano_hikari_junmai_ginjo.JPG
+thumbnail: /assets/img/tamano_hikari_junmai_ginjo_thumbnail.JPG
 ---
 
 > Fun fact TODO 
