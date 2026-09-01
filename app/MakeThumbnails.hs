@@ -14,6 +14,9 @@ imgDir = "assets/img"
 defaultWidth :: String
 defaultWidth = "300"
 
+defaultQuality :: String
+defaultQuality = "85"
+
 imageExts :: [String]
 imageExts = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".JPG"]
 
@@ -29,34 +32,77 @@ thumbnailPath dir f =
       ext  = takeExtension f
   in dir </> (base ++ "_thumbnail" ++ ext)
 
+data Options = Options
+  { optWidth    :: String
+  , optForce    :: Bool
+  , optCompress :: Bool
+  , optQuality  :: String
+  , optMaxDim   :: Maybe String
+  , optTargets  :: [FilePath]
+  }
+
+defaultOptions :: Options
+defaultOptions = Options
+  { optWidth    = defaultWidth
+  , optForce    = False
+  , optCompress = False
+  , optQuality  = defaultQuality
+  , optMaxDim   = Nothing
+  , optTargets  = []
+  }
+
 main :: IO ()
 main = do
   args <- getArgs
-  let (width, force, targets) = parseArgs args
+  let opts = parseArgs args
 
-  files <- case targets of
+  files <- case optTargets opts of
     [] -> do
       entries <- listDirectory imgDir
       let imgs = filter (\f -> isImage f && not (isThumbnail f)) entries
       pure (map (imgDir </>) imgs)
     fs -> pure fs
 
-  when (null files) $ do
+  when (null files) $
     putStrLn "No images found."
 
-  forM_ files $ \src -> do
-    let dir  = imgDir
-        dest = thumbnailPath dir (takeBaseName src ++ takeExtension src)
-    exists <- doesFileExist dest
-    if exists && not force
-      then putStrLn $ "Skipping " ++ src ++ " (thumbnail already exists, use --force to override)"
-      else do
-        putStrLn $ "Thumbnailing " ++ src ++ " -> " ++ dest
-        callProcess "magick" [src, "-auto-orient", "-resize", width ++ "x>", "-strip", dest]
+  forM_ files $ \src ->
+    if optCompress opts
+      then compressImage opts src
+      else makeThumbnail opts src
 
-parseArgs :: [String] -> (String, Bool, [FilePath])
-parseArgs = go defaultWidth False
+-- | Shrink a copy of the image down to a small preview width.
+makeThumbnail :: Options -> FilePath -> IO ()
+makeThumbnail opts src = do
+  let dest = thumbnailPath imgDir (takeBaseName src ++ takeExtension src)
+  exists <- doesFileExist dest
+  if exists && not (optForce opts)
+    then putStrLn $ "Skipping " ++ src ++ " (thumbnail already exists, use --force to override)"
+    else do
+      putStrLn $ "Thumbnailing " ++ src ++ " -> " ++ dest
+      callProcess "magick"
+        [src, "-auto-orient", "-resize", optWidth opts ++ "x>", "-strip", dest]
+
+-- | Re-encode the image in place at a lower JPEG quality (and optionally
+-- capped to a maximum dimension) to shrink the file that ships with the site.
+compressImage :: Options -> FilePath -> IO ()
+compressImage opts src = do
+  let resizeArgs = case optMaxDim opts of
+        Nothing -> []
+        Just d  -> ["-resize", d ++ "x" ++ d ++ ">"]
+      capNote = maybe "" (\d -> ", max " ++ d ++ "px") (optMaxDim opts)
+  putStrLn $ "Compressing " ++ src ++ " (quality " ++ optQuality opts ++ capNote ++ ")"
+  callProcess "magick" $
+    [src, "-auto-orient"] ++ resizeArgs ++
+    ["-strip", "-interlace", "Plane", "-quality", optQuality opts, src]
+
+parseArgs :: [String] -> Options
+parseArgs = go defaultOptions
   where
-    go w f ("--width" : n : rest) = go n f rest
-    go w f ("--force" : rest)     = go w True rest
-    go w f args                   = (w, f, args)
+    go o ("--width"   : n : rest) = go (o { optWidth = n })       rest
+    go o ("--force"       : rest) = go (o { optForce = True })    rest
+    go o ("--compress"    : rest) = go (o { optCompress = True }) rest
+    go o ("--quality" : n : rest) = go (o { optQuality = n })     rest
+    go o ("--max-dim" : n : rest) = go (o { optMaxDim = Just n }) rest
+    go o (f               : rest) = go (o { optTargets = optTargets o ++ [f] }) rest
+    go o []                       = o
