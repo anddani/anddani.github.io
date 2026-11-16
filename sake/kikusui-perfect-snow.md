@@ -8,6 +8,8 @@ smv: "-19"
 acidity: "1.6"
 notes: Ripe banana
 rating: "2.5"
+image: /assets/img/kikusui_perfect_snow.JPG
+thumbnail: /assets/img/kikusui_perfect_snow_thumbnail.JPG
 ---
 
 > Fun fact TODO
