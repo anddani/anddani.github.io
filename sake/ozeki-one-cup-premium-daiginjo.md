@@ -1,8 +1,8 @@
 ---
 title: Ozeki One Cup Premium Daiginjo
-date: 2026-07-06
+date: 2026-07-04
 type: Daiginjo
-polish: "TODO"
+polish: "50%"
 abv: "15.8%"
 smv: "+4"
 acidity: "1.3"
