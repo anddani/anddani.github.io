@@ -17,6 +17,10 @@ main = hakyll $ do
     route   idRoute
     compile copyFileCompiler
 
+  match (fromList ["nelm/index.html", "nelm/main.js", "nelm/index.js"]) $ do
+    route   idRoute
+    compile copyFileCompiler
+
   match "templates/*" $ compile templateBodyCompiler
 
   match "index.md" $ do
