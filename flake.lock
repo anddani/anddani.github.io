@@ -34,10 +34,34 @@
         "type": "github"
       }
     },
+    "odin-gb": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794877922,
+        "narHash": "sha256-4Lu69Unk2jsdw6VB3A2Y+7GuUSYLbU8xbEF5E2nqcHw=",
+        "owner": "anddani",
+        "repo": "odin-gb",
+        "rev": "f273a3c89477ab9c23a32521cc3e6ce695934764",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anddani",
+        "repo": "odin-gb",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "odin-gb": "odin-gb"
       }
     },
     "systems": {

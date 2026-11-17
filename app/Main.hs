@@ -21,6 +21,12 @@ main = hakyll $ do
     route   idRoute
     compile copyFileCompiler
 
+  match (fromList
+      [ "odin-gb/index.html", "odin-gb/odin-gb.js", "odin-gb/odin-gb.wasm"
+      , "odin-gb/odin.js", "odin-gb/audio-worklet.js" ]) $ do
+    route   idRoute
+    compile copyFileCompiler
+
   match "templates/*" $ compile templateBodyCompiler
 
   match "index.md" $ do

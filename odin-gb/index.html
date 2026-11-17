@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odin GB</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="font-mincho min-h-screen bg-stone-100 text-stone-900 dark:bg-stone-900 dark:text-stone-100">
+
+  <!-- Theme toggle (top-right, fixed) -->
+  <button id="theme-toggle"
+    class="fixed right-3 top-3 z-50 cursor-pointer border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-stone-50 px-3 py-1 text-sm font-mincho active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600 dark:bg-stone-800 dark:text-stone-100">
+    ◐
+  </button>
+
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <!-- Back link -->
+    <a href="/" class="text-sm text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-200">←
+      home</a>
+
+    <!-- Header -->
+    <h1 class="mt-4 mb-2 text-4xl font-bold tracking-tight flex items-center gap-3">
+      <img src="/assets/odin_gb_icon.svg" alt="" class="size-10" />
+      Odin GB
+    </h1>
+    <p class="mb-8 text-stone-500 dark:text-stone-400">
+      A Game Boy Color emulator written in Odin, compiled to WebAssembly from
+      <a href="https://github.com/anddani/odin-gb" class="underline text-[#2563eb]"
+        target="_blank" rel="noopener noreferrer">anddani/odin-gb</a>.
+      Load or drop a <code>.gb</code> / <code>.gbc</code> ROM to try it. Battery saves are kept in your browser.
+    </p>
+
+    <!-- ROM picker + status -->
+    <div class="mb-4 flex flex-wrap items-center gap-3">
+      <label
+        class="cursor-pointer border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-stone-50 px-3 py-1 text-sm hover:bg-stone-200 active:border-b-gray-300 active:border-l-gray-600 active:border-r-gray-300 active:border-t-gray-600 dark:bg-stone-800 dark:hover:bg-stone-700">
+        Load ROM
+        <input id="rom" type="file" accept=".gb,.gbc" class="hidden" />
+      </label>
+      <span id="status" class="text-sm text-stone-500 dark:text-stone-400">Loading emulator…</span>
+    </div>
+
+    <!-- Screen -->
+    <div
+      class="inline-block border-2 border-b-gray-600 border-l-gray-300 border-r-gray-600 border-t-gray-300 bg-black p-2">
+      <canvas id="screen" width="160" height="144" class="block w-[480px] max-w-full bg-black"
+        style="image-rendering: pixelated; aspect-ratio: 160 / 144;"></canvas>
+    </div>
+
+    <!-- Controls -->
+    <div class="mt-8 max-w-xs border-2 border-stone-400 dark:border-stone-600">
+      <div
+        class="bg-stone-200 dark:bg-stone-800 py-2 px-4 text-center font-black tracking-widest border-b-2 border-stone-400 dark:border-stone-600">
+        CONTROLS
+      </div>
+      <table class="w-full text-sm bg-white/60 dark:bg-stone-900/60">
+        <tbody>
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400 w-32">X</td>
+            <td class="px-4 py-2">A</td>
+          </tr>
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400">Z</td>
+            <td class="px-4 py-2">B</td>
+          </tr>
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400">Shift</td>
+            <td class="px-4 py-2">Select</td>
+          </tr>
+          <tr class="border-b border-stone-200 dark:border-stone-700">
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400">Enter</td>
+            <td class="px-4 py-2">Start</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-bold text-stone-500 dark:text-stone-400">Arrow keys</td>
+            <td class="px-4 py-2">D-pad</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="/odin-gb/odin.js"></script>
+  <script type="module">
+    const status = document.getElementById("status");
+    let emu;
+    try {
+      // Dynamic import so a missing build shows up in the status line
+      const { createEmulator } = await import("/odin-gb/odin-gb.js");
+      emu = await createEmulator({ canvas: document.getElementById("screen") });
+    } catch (e) {
+      status.textContent = `Failed to load emulator: ${e.message}`;
+      throw e;
+    }
+    status.textContent = "No ROM loaded";
+
+    async function load(file) {
+      try {
+        await emu.loadRom(new Uint8Array(await file.arrayBuffer()));
+        status.textContent = file.name;
+      } catch (e) {
+        status.textContent = e.message;
+      }
+    }
+
+    document.getElementById("rom").addEventListener("change", (e) => {
+      if (e.target.files[0]) load(e.target.files[0]);
+    });
+    document.addEventListener("dragover", (e) => e.preventDefault());
+    document.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if (e.dataTransfer.files[0]) load(e.dataTransfer.files[0]);
+    });
+  </script>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("theme-toggle");
+      var html = document.documentElement;
+      var stored = localStorage.getItem("theme");
+      if (stored) html.setAttribute("data-theme", stored);
+      btn.addEventListener("click", function () {
+        var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+    })();
+  </script>
+</body>
+
+</html>

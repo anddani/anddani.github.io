@@ -12,6 +12,11 @@ cabal run site -- watch
 tailwindcss -i css/input.css -o css/style.css --watch
 ```
 
+The odin-gb page needs the emulator's web build next to it. Locally:
+```sh
+install -m 644 $(nix build github:anddani/odin-gb#web --no-link --print-out-paths)/{odin-gb.js,odin-gb.wasm,odin.js,audio-worklet.js} odin-gb/
+```
+
 Generate thumbnails:
 ```sh
 cabal run make-thumbnails -- --force

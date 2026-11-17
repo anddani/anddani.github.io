@@ -21,3 +21,7 @@ CLAUDE.md
 # Elm (nelm)
 nelm/elm-stuff/
 nelm/main.js
+
+# odin-gb (copied from the odin-gb flake's web package)
+odin-gb/*
+!odin-gb/index.html

@@ -4,9 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    odin-gb = {
+      url = "github:anddani/odin-gb";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, odin-gb }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -25,6 +30,10 @@
           registryDat = ./nelm/registry.dat;
         };
 
+        # Browser build of odin-gb (wasm + JS host). Bump with
+        # `nix flake update odin-gb`.
+        odinGbWeb = odin-gb.packages.${system}.web;
+
         # The fully built static site
         website = pkgs.stdenv.mkDerivation {
           name = "website";
@@ -36,6 +45,7 @@
           buildPhase = ''
             tailwindcss -i css/input.css -o css/style.css --minify
             (cd nelm && elm make src/Main.elm --optimize --output=main.js)
+            install -m 644 ${odinGbWeb}/{odin-gb.js,odin-gb.wasm,odin.js,audio-worklet.js} odin-gb/
             site build
           '';
           installPhase = ''
